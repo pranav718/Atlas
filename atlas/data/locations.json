@@ -1,0 +1,128 @@
+[
+    {
+        "id": 1,
+        "name": "Academic Block 1 (AB1)",
+        "coordinates": [26.84252267769878, 75.56475881089028],
+        "hours": "8:00 AM - 8:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 2,
+        "name": "Academic Block 2 (AB2)",
+        "coordinates": [26.843009041165054, 75.56583836911558],
+        "hours": "8:00 AM - 8:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 3,
+        "name": "Academic Block 3 (AB3)",
+        "coordinates": [26.844502393826332, 75.56476082808086],
+        "hours": "9:00 AM - 10:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 4,
+        "name": "Academic Block 4 (AB4)",
+        "coordinates": [26.84432342141948, 75.56480585671513],
+        "hours": "9:00 AM - 8:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 5,
+        "name": "Dome Building",
+        "coordinates": [26.84170260561239, 75.56624963390331],
+        "hours": "8:00 AM - 10:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 6,
+        "name": "Grand Staircase",
+        "coordinates": [26.842538895413846, 75.56545860922176],
+        "hours": "24 Hours",
+        "status": "Open"
+    },
+    {
+        "id": 7,
+        "name": "Old Mess",
+        "coordinates": [26.842958110025513, 75.56529740577874],
+        "hours": "24 Hours",
+        "status": "Open"
+    },
+    {
+        "id": 8,
+        "name": "Cricket Ground",
+        "coordinates": [26.84555260680592, 75.56437977970938],
+        "hours": "24 Hours",
+        "status": "Open"
+    },
+    {
+        "id": 9,
+        "name": "Tennis Courts",
+        "coordinates": [26.845916486587484, 75.5654115992181],
+        "hours": "24 Hours",
+        "status": "Open"
+    },
+    {
+        "id": 10,
+        "name": "GHS",
+        "coordinates": [26.84168063188081, 75.56298751550554],
+        "hours": "6:00 AM - 9:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 11,
+        "name": "Boys' Hostel B10",
+        "coordinates": [26.842587713834796, 75.56163910374428],
+        "hours": "9:00 AM - 8:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 12,
+        "name": "Medical Centre",
+        "coordinates": [26.841242818416347, 75.56248092837704],
+        "hours": "24 Hours",
+        "status": "Open"
+    },
+    {
+        "id": 13,
+        "name": "Girl's Hostel G5",
+        "coordinates": [26.839018101988806, 75.56171938444422],
+        "hours": "9:00 AM - 6:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 14,
+        "name": "Amphitheatre",
+        "coordinates": [26.843248340055393, 75.56626501290748],
+        "hours": "10:00 AM - 7:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 15,
+        "name": "Jogger's Park",
+        "coordinates": [26.840217970136, 75.56335794463118],
+        "hours": "8:00 AM - 10:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 16,
+        "name": "Boy's Hostel B3",
+        "coordinates": [26.84159345497758, 75.56224247315566],
+        "hours": "9:00 AM - 8:00 PM",
+        "status": "Open"
+    },
+    {
+        "id": 17,
+        "name": "Let's Go Live GHS",
+        "coordinates": [26.84096350743498, 75.56291448222952],
+        "hours": "24 Hours",
+        "status": "Open"
+    },
+    {
+        "id": 18,
+        "name": "AWS Building",
+        "coordinates": [26.84366810077311, 75.56690807407736],
+        "hours": "24 Hours",
+        "status": "Open"
+    }
+]
