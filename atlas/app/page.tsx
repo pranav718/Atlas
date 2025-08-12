@@ -125,11 +125,11 @@ if (typeof window !== 'undefined') {
 const Header: React.FC = () => (
   <header className="relative">
     {/* Blue header strip */}
-    <div className="h-[40px] bg-[#7A96D5] flex items-center px-4">
-      <img src="/uniway.svg" alt="Uniway Logo" className="h-[30px]" />
+    <div className="h-[40px] bg-[#7A96D5] flex items-center px-4"></div>
+    {/* Cyan background with centered logo */}
+    <div className="h-[200px] bg-[#88DBE7] flex flex-col items-center justify-end relative">
+      <img src="/uniway.svg" alt="Uniway Logo" className="h-[120px] mb-16 mx-auto" />
     </div>
-    {/* Cyan background */}
-    <div className="h-[200px] bg-[#88DBE7]"></div>
     <SearchBar />
   </header>
 );
