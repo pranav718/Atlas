@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.10",
-    "@types/leaflet": "^1.9.20",
     "leaflet": "^1.9.4",
     "leaflet-routing-machine": "^3.2.12",
     "next": "15.4.6",
@@ -21,6 +20,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/leaflet": "^1.9.20",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
