@@ -78,21 +78,24 @@ const SearchBar: React.FC = () => {
           style={{ zIndex: 10 }}
         />
         {focused && suggestions.length > 0 && (
-          <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto z-30 w-full">
-            {suggestions.map((loc) => (
-              <li
-                key={loc.id}
-                className="px-4 py-2 cursor-pointer hover:bg-blue-100 text-black"
-                onMouseDown={() => {
-                  setQuery(loc.name);
-                  setFocused(false);
-                }}
-              >
-                {loc.name}
-              </li>
-            ))}
-          </ul>
-        )}
+        <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto z-30 w-full">
+          {suggestions.map((loc) => (
+            <li
+              key={loc.id}
+              className="px-4 py-2 cursor-pointer hover:bg-blue-100 text-black flex justify-between items-center"
+              onMouseDown={() => {
+                setQuery(loc.name);
+                setFocused(false);
+              }}
+            >
+              <span>{loc.name}</span>
+              <svg width="24px" height="24px" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-gray-400">
+                <path d="M6.00005 19L19 5.99996M19 5.99996V18.48M19 5.99996H6.52005" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
+              </svg>
+            </li>
+          ))}
+        </ul>
+)}
       </div>
     </div>
   );
