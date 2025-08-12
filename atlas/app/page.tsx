@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import locationsData from '../data/locations.json';
 import Card from './components/Card';
 
@@ -84,7 +84,17 @@ const SearchBar: React.FC = () => {
               key={loc.id}
               className="px-4 py-2 cursor-pointer hover:bg-blue-100 text-black flex justify-between items-center"
               onMouseDown={() => {
-                window.location.href = `/directions/${encodeURIComponent(loc.name)}`;
+                const locationData = {
+                  name: loc.name,
+                  // Ensure coordinates are in the correct format
+                  coordinates: [
+                    Number(loc.coordinates[0]),
+                    Number(loc.coordinates[1])
+                  ] as [number, number]
+                };
+                
+                const encodedData = encodeURIComponent(JSON.stringify(locationData));
+                window.location.href = `/directions/${encodedData}`;
                 setQuery(loc.name);
                 setFocused(false);
               }}
