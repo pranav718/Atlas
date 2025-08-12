@@ -36,3 +36,44 @@ body {
 .font-twcenmt {
   font-family: 'TW Cen MT Extra Bold', Arial, sans-serif;
 }
+
+/* Styling for the routing-machine box */
+.leaflet-routing-container {
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  border-radius: 8px;
+  max-width: 350px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Header styling */
+.leaflet-routing-container h2 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Individual route summary styling */
+.leaflet-routing-alt {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+.leaflet-routing-alt.leaflet-routing-alt-selected {
+  background-color: #e6f7ff;
+  border-left: 3px solid #1890ff;
+}
+
+/* Button styling */
+.leaflet-routing-container button {
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.leaflet-routing-container button:hover {
+  background-color: #40a9ff;
+}

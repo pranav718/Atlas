@@ -73,7 +73,7 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
           <MapWithRouting 
             userLocation={userLocation} 
             destination={locationData.coordinates}
-            locationName={locationData.name}
+            //locationName={locationData.name}
           />
         )}
       </div>
