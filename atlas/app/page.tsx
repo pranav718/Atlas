@@ -65,35 +65,34 @@ const SearchBar: React.FC = () => {
       style={{ top: '190px' }}
       ref={inputRef}
     >
-      <div className={`relative flex justify-center w-full`}>
-        <div className={`w-full ${focused ? 'max-w-2xl' : 'max-w-xl'} transition-all duration-300`}> 
-          <input
-            type="text"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            onFocus={() => setFocused(true)}
-            placeholder="Search locations..."
-            className="w-full px-4 py-2 rounded-lg shadow border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-gray-100 placeholder-gray-500 caret-black text-black transition-all duration-300"
-            style={{ zIndex: 10 }}
-          />
-          {focused && suggestions.length > 0 && (
-            <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto z-30 w-full">
-              {suggestions.map((loc) => (
-                <li
-                  key={loc.id}
-                  className="px-4 py-2 cursor-pointer hover:bg-blue-100 text-black"
-                  onMouseDown={() => {
-                    // Placeholder for navigation logic
-                    setQuery(loc.name);
-                    setFocused(false);
-                  }}
-                >
-                  {loc.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+      {/* This is the new container for the search bar and suggestions. */}
+      {/* We are using a fixed max-w-xl to keep the search box contained and centered. */}
+      <div className={`relative w-full max-w-xl transition-all duration-300`}> 
+        <input
+          type="text"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          onFocus={() => setFocused(true)}
+          placeholder="Search locations..."
+          className="w-full px-4 py-2 rounded-lg shadow border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 bg-gray-100 placeholder-gray-500 caret-black text-black transition-all duration-300"
+          style={{ zIndex: 10 }}
+        />
+        {focused && suggestions.length > 0 && (
+          <ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg max-h-60 overflow-auto z-30 w-full">
+            {suggestions.map((loc) => (
+              <li
+                key={loc.id}
+                className="px-4 py-2 cursor-pointer hover:bg-blue-100 text-black"
+                onMouseDown={() => {
+                  setQuery(loc.name);
+                  setFocused(false);
+                }}
+              >
+                {loc.name}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
