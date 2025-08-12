@@ -3,22 +3,45 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
+
 interface CardProps {
   title: string;
   imageUrl: string;
+  coordinates: [number, number];
   mostVisited?: string[];
 }
 
-const Card: React.FC<CardProps> = ({ title, imageUrl, mostVisited }) => {
+
+const Card: React.FC<CardProps> = ({ title, imageUrl, coordinates, mostVisited }) => {
     const router = useRouter();
+
+    // Helper to encode location data
+    const encodeLocation = (name: string, coords: [number, number]) => {
+      return encodeURIComponent(JSON.stringify({ name, coordinates: coords }));
+    };
+
+    // Card click: go to map with this card's location
+    const handleCardClick = () => {
+      const encodedData = encodeLocation(title, coordinates);
+      router.push(`/directions/${encodedData}`);
+    };
+
+    // Most visited click: try to find coordinates for sub-place, else fallback to card's coordinates
     const handleLinkClick = (place: string) => {
-        // Navigate to the new directions page, encoding the place name
-        router.push(`/directions/${encodeURIComponent(place)}`);
+      // Try to find coordinates for sub-place (if available in locationsData)
+      // For now, fallback to card's coordinates
+      const encodedData = encodeLocation(place, coordinates);
+      router.push(`/directions/${encodedData}`);
     };
 
   
     return (
-    <div className="relative w-full h-[250px] rounded-lg overflow-hidden shadow-lg group cursor-pointer">
+    <div className="relative w-full h-[250px] rounded-lg overflow-hidden shadow-lg group cursor-pointer"
+      onClick={handleCardClick}
+      tabIndex={0}
+      role="button"
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') handleCardClick(); }}
+    >
       {/* Background Image with Overlay */}
       <div
         className="absolute inset-0 bg-cover bg-center transition-all duration-300 group-hover:scale-105"

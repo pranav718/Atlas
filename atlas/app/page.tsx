@@ -156,23 +156,27 @@ export default function Home() {
       <main className="flex-1 bg-gray-200 flex items-center justify-center">
         <div className="bg-white rounded-lg shadow-lg w-full max-w-7xl my-3 p-10 grid grid-cols-2 gap-x-32 gap-y-20">
           <Card
-            title="ACADEMIC BLOCK 1"
+            title="Academic Block 1 (AB1)"
             imageUrl="/ab1.jpeg"
+            coordinates={[26.84252267769878, 75.56475881089028]}
             mostVisited={["Classrooms", "Labs", "Cafeteria"]}
           />
           <Card
-            title="ACADEMIC BLOCK 2"
+            title="Academic Block 2 (AB2)"
             imageUrl="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop"
+            coordinates={[26.843009041165054, 75.56583836911558]}
             mostVisited={["Ramdas Pai Ampitheatre", "Sharda Pai Auditorium", "Quess Outlet"]}
           />
           <Card
-            title="ACADEMIC BLOCK 3"
+            title="Academic Block 3 (AB3)"
             imageUrl="/ab3-1.jpeg"
+            coordinates={[26.844502393826332, 75.56476082808086]}
             mostVisited={["Design Studios", "Tech Labs", "Project Rooms"]}
           />
           <Card
             title="LECTURE HALL COMPLEX"
             imageUrl="/LHC.jpeg"
+            coordinates={[26.84432342141948, 75.56480585671513]}
             mostVisited={["Auditoriums", "Conference Rooms", "Foyer"]}
           />
         </div>
