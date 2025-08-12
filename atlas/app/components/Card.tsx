@@ -37,16 +37,13 @@ const Card: React.FC<CardProps> = ({ title, imageUrl, mostVisited }) => {
             <ul className="text-sm"> 
                 {mostVisited.map((place, index) => (
                     <li
-                    key={index}
-                    className="cursor-pointer hover:underline" // Add styling for a clickable link
-                    onClick={() => {
-                        // here we will implement our navigation logic
-                        // for example, navigate to a directions page
-                        alert(`Navigating to directions for: ${place}`);
-                        // we weill use a routing function here like router.push(`/directions?to=${place}`)
-                    }}
-                    >
-                    {place}
+                        key={index}
+                        className="cursor-pointer hover:underline hover:text-blue-500"
+                        onClick={() => {
+                            alert(`Navigating to directions for: ${place}`);
+                        }}
+                        >
+                        {place}
                     </li>
                 ))}
             </ul>

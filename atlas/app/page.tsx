@@ -143,22 +143,22 @@ export default function Home() {
         <div className="bg-white rounded-lg shadow-lg w-full max-w-7xl my-3 p-10 grid grid-cols-2 gap-x-32 gap-y-20">
           <Card
             title="ACADEMIC BLOCK 1"
-            imageUrl="https://images.unsplash.com/photo-1541339907198-e087561faa91?q=80&w=2070&auto=format&fit=crop"
-            mostVisited={["Classrooms", "Labs", "Library"]}
+            imageUrl="/ab1.jpeg"
+            mostVisited={["Classrooms", "Labs", "Cafeteria"]}
           />
           <Card
             title="ACADEMIC BLOCK 2"
             imageUrl="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop"
-            mostVisited={["Research Centers", "Faculty Offices", "Seminar Halls"]}
+            mostVisited={["Ramdas Pai Ampitheatre", "Sharda Pai Auditorium", "Quess Outlet"]}
           />
           <Card
             title="ACADEMIC BLOCK 3"
-            imageUrl="https://images.unsplash.com/photo-1549497551-729938b812f8?q=80&w=1932&auto=format&fit=crop"
+            imageUrl="/ab3-1.jpeg"
             mostVisited={["Design Studios", "Tech Labs", "Project Rooms"]}
           />
           <Card
             title="LECTURE HALL COMPLEX"
-            imageUrl="https://images.unsplash.com/photo-1517070208541-6ddc5d3bd034?q=80&w=1974&auto=format&fit=crop"
+            imageUrl="/LHC.jpeg"
             mostVisited={["Auditoriums", "Conference Rooms", "Foyer"]}
           />
         </div>
