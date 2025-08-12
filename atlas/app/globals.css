@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@font-face {
+  font-family: 'TW Cen MT Extra Bold';
+  src: url('/fonts/TwCenMt-ExtraBold.ttf') format('truetype'),
+       url('/fonts/TwCenMt-ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+
+.font-twcenmt {
+  font-family: 'TW Cen MT Extra Bold', Arial, sans-serif;
+}

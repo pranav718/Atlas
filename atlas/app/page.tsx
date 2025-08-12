@@ -140,10 +140,22 @@ export default function Home() {
       {/* Main content area with centered white rectangle */}
       <main className="flex-1 bg-gray-200 flex items-center justify-center">
         <div className="bg-white rounded-lg shadow-lg w-full max-w-7xl h-[500px] my-3 p-10 mt-4 mb-4 grid grid-cols-2 grid-rows-2 gap-x-32 gap-y-20">
-          <div className="text-black text-3xl font-extrabold self-start justify-self-start">ACADEMIC BLOCK 1</div>
-          <div className="text-black text-3xl font-extrabold self-start justify-self-end text-right mt-30">ACADEMIC BLOCK 2</div>
-          <div className="text-black text-3xl font-extrabold self-end justify-self-start mb-30">ACADEMIC BLOCK 3</div>
-          <div className="text-black text-3xl font-extrabold self-end justify-self-end text-right">LECTURE HALL<br/>COMPLEX</div>
+          <div className="flex flex-col items-center justify-center text-center text-black text-3xl font-extrabold font-twcenmt">
+            <span>ACADEMIC</span>
+            <span>BLOCK 1</span>
+          </div>
+          <div className="flex flex-col items-center justify-center text-center text-black text-3xl font-extrabold font-twcenmt mt-30">
+            <span>ACADEMIC</span>
+            <span>BLOCK 2</span>
+          </div>
+          <div className="flex flex-col items-center justify-center text-center text-black text-3xl font-extrabold font-twcenmt mb-30">
+            <span>ACADEMIC</span>
+            <span>BLOCK 3</span>
+          </div>
+          <div className="flex flex-col items-center justify-center text-center text-black text-3xl font-extrabold font-twcenmt">
+            <span>LECTURE HALL</span>
+            <span>COMPLEX</span>
+          </div>
         </div>
       </main>
       <Footer />
