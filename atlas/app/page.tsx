@@ -2,6 +2,7 @@
 // In app/page.tsx
 import React, { useState, useRef, useEffect } from 'react';
 import locationsData from '../data/locations.json';
+import Card from './components/Card';
 
 type Location = {
   id: number;
@@ -136,28 +137,35 @@ const Footer: React.FC = () => (
 
 export default function Home() {
   return (
-    // This is the main container for the whole page
     <div className="flex flex-col h-screen">
       <Header />
       {/* Main content area with centered white rectangle */}
       <main className="flex-1 bg-gray-200 flex items-center justify-center">
-        <div className="bg-white rounded-lg shadow-lg w-full max-w-7xl h-[500px] my-3 p-10 mt-4 mb-4 grid grid-cols-2 grid-rows-2 gap-x-32 gap-y-20">
-          <div className="flex flex-col items-center justify-center text-center text-black text-3xl font-extrabold font-twcenmt">
-            <span>ACADEMIC</span>
-            <span>BLOCK 1</span>
-          </div>
-          <div className="flex flex-col items-center justify-center text-center text-black text-3xl font-extrabold font-twcenmt mt-30">
-            <span>ACADEMIC</span>
-            <span>BLOCK 2</span>
-          </div>
-          <div className="flex flex-col items-center justify-center text-center text-black text-3xl font-extrabold font-twcenmt mb-30">
-            <span>ACADEMIC</span>
-            <span>BLOCK 3</span>
-          </div>
-          <div className="flex flex-col items-center justify-center text-center text-black text-3xl font-extrabold font-twcenmt">
-            <span>LECTURE HALL</span>
-            <span>COMPLEX</span>
-          </div>
+        <div className="bg-white rounded-lg shadow-lg w-full max-w-7xl my-3 p-10 grid grid-cols-2 gap-x-32 gap-y-20">
+          <Card
+            title="ACADEMIC BLOCK 1"
+            subtitle="BUILDING BLAZE"
+            imageUrl="https://images.unsplash.com/photo-1541339907198-e087561faa91?q=80&w=2070&auto=format&fit=crop"
+            mostVisited={["Classrooms", "Labs", "Library"]}
+          />
+          <Card
+            title="ACADEMIC BLOCK 2"
+            subtitle="THE KNOWLEDGE HUB"
+            imageUrl="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop"
+            mostVisited={["Research Centers", "Faculty Offices", "Seminar Halls"]}
+          />
+          <Card
+            title="ACADEMIC BLOCK 3"
+            subtitle="INNOVATION SPHERE"
+            imageUrl="https://images.unsplash.com/photo-1549497551-729938b812f8?q=80&w=1932&auto=format&fit=crop"
+            mostVisited={["Design Studios", "Tech Labs", "Project Rooms"]}
+          />
+          <Card
+            title="LECTURE HALL COMPLEX"
+            subtitle="THE GATHERING"
+            imageUrl="https://images.unsplash.com/photo-1517070208541-6ddc5d3bd034?q=80&w=1974&auto=format&fit=crop"
+            mostVisited={["Auditoriums", "Conference Rooms", "Foyer"]}
+          />
         </div>
       </main>
       <Footer />
