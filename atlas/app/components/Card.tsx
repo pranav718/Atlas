@@ -3,12 +3,11 @@ import React from 'react';
 
 interface CardProps {
   title: string;
-  subtitle: string;
   imageUrl: string;
   mostVisited?: string[];
 }
 
-const Card: React.FC<CardProps> = ({ title, subtitle, imageUrl, mostVisited }) => {
+const Card: React.FC<CardProps> = ({ title, imageUrl, mostVisited }) => {
   return (
     <div className="relative w-full h-[250px] rounded-lg overflow-hidden shadow-lg group cursor-pointer">
       {/* Background Image with Overlay */}
@@ -23,22 +22,33 @@ const Card: React.FC<CardProps> = ({ title, subtitle, imageUrl, mostVisited }) =
       {/* Default Text */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white p-4 transition-all duration-300 group-hover:transform group-hover:scale-95 group-hover:opacity-0">
         <h2 className="text-3xl font-extrabold font-twcenmt">{title}</h2>
-        <h3 className="text-xl font-bold font-twcenmt">{subtitle}</h3>
+
       </div>
 
       {/* Hover Content */}
       <div className="absolute inset-0 flex flex-col justify-between p-6 text-white transform translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
         <div className="text-left">
           <h2 className="text-2xl font-extrabold font-twcenmt">{title}</h2>
-          <h3 className="text-lg font-bold font-twcenmt">{subtitle}</h3>
+          
         </div>
         {mostVisited && (
           <div className="text-right mt-4 self-end">
             <h4 className="text-lg font-bold">Most Visited Places:</h4>
-            <ul className="text-sm list-disc list-inside">
-              {mostVisited.map((place, index) => (
-                <li key={index}>{place}</li>
-              ))}
+            <ul className="text-sm"> 
+                {mostVisited.map((place, index) => (
+                    <li
+                    key={index}
+                    className="cursor-pointer hover:underline" // Add styling for a clickable link
+                    onClick={() => {
+                        // here we will implement our navigation logic
+                        // for example, navigate to a directions page
+                        alert(`Navigating to directions for: ${place}`);
+                        // we weill use a routing function here like router.push(`/directions?to=${place}`)
+                    }}
+                    >
+                    {place}
+                    </li>
+                ))}
             </ul>
           </div>
         )}

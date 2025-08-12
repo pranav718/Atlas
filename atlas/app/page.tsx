@@ -1,5 +1,5 @@
 "use client";
-// In app/page.tsx
+
 import React, { useState, useRef, useEffect } from 'react';
 import locationsData from '../data/locations.json';
 import Card from './components/Card';
@@ -66,8 +66,7 @@ const SearchBar: React.FC = () => {
       style={{ top: '190px' }}
       ref={inputRef}
     >
-      {/* This is the new container for the search bar and suggestions. */}
-      {/* We are using a fixed max-w-xl to keep the search box contained and centered. */}
+      
       <div className={`relative w-full max-w-xl transition-all duration-300`}> 
         <input
           type="text"
@@ -124,7 +123,7 @@ if (typeof window !== 'undefined') {
 
 const Header: React.FC = () => (
   <header className="relative">
-    {/* These class names correspond to the colors and heights from your design */}
+    
     <div className="h-[40px] bg-[#7A96D5]"></div> 
     <div className="h-[200px] bg-[#88DBE7]"></div>
     <SearchBar />
@@ -139,30 +138,26 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
-      {/* Main content area with centered white rectangle */}
+
       <main className="flex-1 bg-gray-200 flex items-center justify-center">
         <div className="bg-white rounded-lg shadow-lg w-full max-w-7xl my-3 p-10 grid grid-cols-2 gap-x-32 gap-y-20">
           <Card
             title="ACADEMIC BLOCK 1"
-            subtitle="BUILDING BLAZE"
             imageUrl="https://images.unsplash.com/photo-1541339907198-e087561faa91?q=80&w=2070&auto=format&fit=crop"
             mostVisited={["Classrooms", "Labs", "Library"]}
           />
           <Card
             title="ACADEMIC BLOCK 2"
-            subtitle="THE KNOWLEDGE HUB"
             imageUrl="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop"
             mostVisited={["Research Centers", "Faculty Offices", "Seminar Halls"]}
           />
           <Card
             title="ACADEMIC BLOCK 3"
-            subtitle="INNOVATION SPHERE"
             imageUrl="https://images.unsplash.com/photo-1549497551-729938b812f8?q=80&w=1932&auto=format&fit=crop"
             mostVisited={["Design Studios", "Tech Labs", "Project Rooms"]}
           />
           <Card
             title="LECTURE HALL COMPLEX"
-            subtitle="THE GATHERING"
             imageUrl="https://images.unsplash.com/photo-1517070208541-6ddc5d3bd034?q=80&w=1974&auto=format&fit=crop"
             mostVisited={["Auditoriums", "Conference Rooms", "Foyer"]}
           />
