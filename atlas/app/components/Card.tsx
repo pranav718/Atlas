@@ -1,5 +1,7 @@
+"use client"; 
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 interface CardProps {
   title: string;
@@ -8,7 +10,14 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ title, imageUrl, mostVisited }) => {
-  return (
+    const router = useRouter();
+    const handleLinkClick = (place: string) => {
+        // Navigate to the new directions page, encoding the place name
+        router.push(`/directions/${encodeURIComponent(place)}`);
+    };
+
+  
+    return (
     <div className="relative w-full h-[250px] rounded-lg overflow-hidden shadow-lg group cursor-pointer">
       {/* Background Image with Overlay */}
       <div
@@ -39,9 +48,7 @@ const Card: React.FC<CardProps> = ({ title, imageUrl, mostVisited }) => {
                     <li
                         key={index}
                         className="cursor-pointer hover:underline hover:text-blue-500"
-                        onClick={() => {
-                            alert(`Navigating to directions for: ${place}`);
-                        }}
+                        onClick={() => handleLinkClick(place)}
                         >
                         {place}
                     </li>

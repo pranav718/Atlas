@@ -84,6 +84,7 @@ const SearchBar: React.FC = () => {
               key={loc.id}
               className="px-4 py-2 cursor-pointer hover:bg-blue-100 text-black flex justify-between items-center"
               onMouseDown={() => {
+                window.location.href = `/directions/${encodeURIComponent(loc.name)}`;
                 setQuery(loc.name);
                 setFocused(false);
               }}
