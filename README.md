@@ -148,8 +148,6 @@ This is the **first demo release** — expect some limitations as we collect fee
 
 ## Feedback
 
-## Feedback
-
 If you are part of MUJ and testing UniWay:
 
 - **Report Bugs:** [GitHub Issues](https://github.com/aetosdios27/Atlas_/issues)
