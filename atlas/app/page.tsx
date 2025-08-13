@@ -163,7 +163,7 @@ export default function Home() {
           />
           <Card
             title="Academic Block 2 (AB2)"
-            imageUrl="../public/ab2.jpeg"
+            imageUrl="/ab2.jpeg"
             coordinates={[26.843009041165054, 75.56583836911558]}
             mostVisited={["Ramdas Pai Ampitheatre", "Sharda Pai Auditorium", "Quess Outlet"]}
           />
