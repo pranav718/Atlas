@@ -96,7 +96,7 @@ UniWay provides MUJ students, faculty, and visitors with an **interactive campus
 git clone https://github.com/aetosdios27/Atlas_
 
 # Navigate to the project folder
-cd Atlas_
+cd atlas
 
 # Install dependencies
 npm install
