@@ -163,7 +163,7 @@ export default function Home() {
           />
           <Card
             title="Academic Block 2 (AB2)"
-            imageUrl="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop"
+            imageUrl="/ab2.jpeg"
             coordinates={[26.843009041165054, 75.56583836911558]}
             mostVisited={["Ramdas Pai Ampitheatre", "Sharda Pai Auditorium", "Quess Outlet"]}
           />
