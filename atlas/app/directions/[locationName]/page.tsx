@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface LocationData {
   name: string;
@@ -57,10 +58,18 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
     }
   }, []);
 
+  const router = useRouter();
   return (
     <div className="flex flex-col h-screen">
       <div className="h-[40px] bg-[#7A96D5] flex items-center px-4">
-        <img src="/uniway.svg" alt="Uniway Logo" className="h-[30px]" />
+        <button
+          onClick={() => router.push('/')}
+          aria-label="Go to home page"
+          className="focus:outline-none"
+          style={{ background: 'none', border: 'none', padding: 0, margin: 0, cursor: 'pointer' }}
+        >
+          <img src="/uniway.svg" alt="Uniway Logo" className="h-[30px]" />
+        </button>
       </div>
       {locationError && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">

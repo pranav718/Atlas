@@ -3,10 +3,11 @@ import React, { useEffect } from 'react';
 import L from 'leaflet';
 import 'leaflet-routing-machine';
 import 'leaflet/dist/leaflet.css';
-import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'; // Add this for basic styling
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { MapContainer, Marker, Popup, TileLayer, useMap, ZoomControl } from 'react-leaflet';
 
 // Fix for default markers (must be inside client-only file)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/marker-icon-2x.png',
@@ -18,7 +19,7 @@ const RoutingMachine = ({ userLocation, destination }: { userLocation: [number, 
   const map = useMap();
   useEffect(() => {
     if (!userLocation || !map) return;
-    // @ts-ignore
+    // @ts-expect-error - leaflet-routing-machine types might not be perfectly integrated
     const routingControl = L.Routing.control({
       waypoints: [
         L.latLng(userLocation[0], userLocation[1]),
@@ -27,14 +28,12 @@ const RoutingMachine = ({ userLocation, destination }: { userLocation: [number, 
       routeWhileDragging: false,
       showAlternatives: true,
       fitSelectedRoutes: true,
-      // Change the position of the routing box
-      position: 'topright', // Default is 'topleft', 'topright', 'bottomleft', 'bottomright'
-      // Add custom collapsed option for a cleaner look
+      position: 'topright',
       collapsible: true,
-      collapsed: false, // Start with it collapsed or expanded
+      collapsed: false,
     }).addTo(map);
     return () => {
-      // @ts-ignore
+      // @ts-expect-error - a bit of a hack to remove the control
       routingControl.remove();
     };
   }, [userLocation, destination, map]);
@@ -46,7 +45,7 @@ const MapWithRouting = ({ userLocation, destination }: { userLocation: [number, 
     center={userLocation}
     zoom={13}
     style={{ height: '100%', width: '100%' }}
-    zoomControl={false} // Disable default zoom control
+    zoomControl={false}
   >
     <TileLayer
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -59,7 +58,7 @@ const MapWithRouting = ({ userLocation, destination }: { userLocation: [number, 
       <Popup>Manipal University Jaipur</Popup>
     </Marker>
     <RoutingMachine userLocation={userLocation} destination={destination} />
-    <ZoomControl position="bottomright" /> {/* Add a new zoom control at the bottom right */}
+    <ZoomControl position="bottomright" />
   </MapContainer>
 );
 
