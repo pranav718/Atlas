@@ -1,10 +1,12 @@
 
-````markdown
+<!-- markdownlint-disable MD033 MD051 -->
 <div align="center">
 
 # UniWay – MUJ Campus Navigation
 
+
 ### Transforming MUJ Campus Maps into Seamless Navigational Experiences
+
 
 [![GitHub last commit](https://img.shields.io/github/last-commit/aetosdios27/Atlas_?style=for-the-badge&logo=github&labelColor=333)](https://github.com/aetosdios27/Atlas_)
 ![GitHub top language](https://img.shields.io/github/languages/top/aetosdios27/Atlas_?style=for-the-badge&color=blue&labelColor=333)
@@ -12,8 +14,10 @@
 
 ---
 
-[**Live Demo 🚀**](https://atlas-dn8h.vercel.app/)  
+[**Live Demo 🚀**](https://atlas-dn8h.vercel.app/)
+<br>
 ⚠ **Disclaimer:** Optimized for **PC/Desktop displays** only — mobile and tablet layouts may not display correctly.
+
 
 </div>
 
@@ -88,6 +92,7 @@ UniWay provides MUJ students, faculty, and visitors with an **interactive campus
 
 ```bash
 # Clone the repository
+
 git clone https://github.com/aetosdios27/Atlas_
 
 # Navigate to the project folder
@@ -95,7 +100,6 @@ cd Atlas_
 
 # Install dependencies
 npm install
-````
 
 ### Usage
 
@@ -109,30 +113,36 @@ npm start
 npm test
 ```
 
----
 
 ## Planned Roadmap
 
-* Mobile and tablet optimization
-* Turn-by-turn navigation
-* Indoor navigation for academic blocks
-* Event location tagging
-* Live route ETA calculations
-* Admin panel for real-time campus data updates
+## Planned Roadmap
+
+- Mobile and tablet optimization
+- Turn-by-turn navigation
+- Indoor navigation for academic blocks
+- Event location tagging
+- Live route ETA calculations
+- Admin panel for real-time campus data updates
 
 ---
 
 ## Team
 
+## Team
+
 **Team Name:** Atlas
+
 **Members:**
 
-* Manavi Mutyalwar
-* Pushpendra Singh
-* Pranav Ray
-* Akshat Singh
+- Manavi Mutyalwar
+- Pushpendra Singh
+- Pranav Ray
+- Akshat Singh
 
 ---
+
+## Disclaimer
 
 ## Disclaimer
 
@@ -144,15 +154,16 @@ This is the **first demo release** — expect some limitations as we collect fee
 
 ## Feedback
 
+## Feedback
+
 If you are part of MUJ and testing UniWay:
 
-* **Report Bugs:** [GitHub Issues](https://github.com/aetosdios27/Atlas_/issues)
-* **Feature Suggestions:** Create a new issue with the `enhancement` label
-* **Contact Dev Team:** Open a discussion in the GitHub Discussions tab
+- **Report Bugs:** [GitHub Issues](https://github.com/aetosdios27/Atlas_/issues)
+- **Feature Suggestions:** Create a new issue with the `enhancement` label
+- **Contact Dev Team:** Open a discussion in the GitHub Discussions tab
 
 ---
 
 ↑ [**Back to Top**](#uniway--muj-campus-navigation)
 
-```
 
