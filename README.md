@@ -116,8 +116,6 @@ npm test
 
 ## Planned Roadmap
 
-## Planned Roadmap
-
 - Mobile and tablet optimization
 - Turn-by-turn navigation
 - Indoor navigation for academic blocks
@@ -126,8 +124,6 @@ npm test
 - Admin panel for real-time campus data updates
 
 ---
-
-## Team
 
 ## Team
 
@@ -141,8 +137,6 @@ npm test
 - Akshat Singh
 
 ---
-
-## Disclaimer
 
 ## Disclaimer
 
