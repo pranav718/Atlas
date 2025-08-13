@@ -1,0 +1,14 @@
+{
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_VERCEL_ENV": "production"
+    }
+  },
+  "crons": [],
+  "overrides": [],
+  "routes": [],
+  "functions": {},
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build:vercel"
+}
