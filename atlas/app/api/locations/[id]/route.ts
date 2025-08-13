@@ -13,25 +13,24 @@ interface Location {
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
-): Promise<NextResponse<Location | { error: string }>> {
+) {
   try {
-    const jsonDirectory = path.join(process.cwd(),'app', 'data');
+    const jsonDirectory = path.join(process.cwd(), 'app', 'data');
     const fileContents = await fs.readFile(jsonDirectory + '/locations.json', 'utf8');
     const locations: Location[] = JSON.parse(fileContents);
 
     const id = parseInt(params.id);
-    const location = locations.find((loc) => loc.id == id);
+    const location = locations.find((loc) => loc.id === id);
 
-    if(location){
+    if (location) {
       return NextResponse.json(location);
-    }else{
+    } else {
       return NextResponse.json(
-        {error: "location not fouind"},
-        {status: 404}
-      )
-
+        { error: "location not found" },
+        { status: 404 }
+      );
     }
-  } 
+  }
   catch (error) {
     console.error('Failed to read locations.json:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
