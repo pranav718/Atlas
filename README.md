@@ -1,97 +1,158 @@
+
+````markdown
 <div align="center">
 
-# ATLAS
+# UniWay – MUJ Campus Navigation
 
-### Transforming Maps Into Seamless Navigational Experiences
+### Transforming MUJ Campus Maps into Seamless Navigational Experiences
 
-</div>
-
-<div align="center">
-
-![GitHub last commit](https://img.shields.io/github/last-commit/aetosdios27/Atlas_?style=for-the-badge&logo=github&labelColor=333)
+[![GitHub last commit](https://img.shields.io/github/last-commit/aetosdios27/Atlas_?style=for-the-badge&logo=github&labelColor=333)](https://github.com/aetosdios27/Atlas_)
 ![GitHub top language](https://img.shields.io/github/languages/top/aetosdios27/Atlas_?style=for-the-badge&color=blue&labelColor=333)
 ![GitHub language count](https://img.shields.io/github/languages/count/aetosdios27/Atlas_?style=for-the-badge&color=blueviolet&labelColor=333)
 
-</div>
+---
 
-<br />
-
-<div align="center">
-  <p>Built with the tools and technologies:</p>
-</div>
-
-<div align="center">
-
-![JSON](https://img.shields.io/badge/json-000000.svg?style=for-the-badge&logo=json&logoColor=white)
-![Markdown](https://img.shields.io/badge/markdown-%23000000.svg?style=for-the-badge&logo=markdown&logoColor=white)
-![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![Leaflet](https://img.shields.io/badge/leaflet-%23199900.svg?style=for-the-badge&logo=leaflet&logoColor=white)
-![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![ESLint](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
+[**Live Demo 🚀**](https://atlas-dn8h.vercel.app/)  
+⚠ **Disclaimer:** Optimized for **PC/Desktop displays** only — mobile and tablet layouts may not display correctly.
 
 </div>
 
 ---
 
-## Table of Contents
+## 📌 Table of Contents
 - [Overview](#overview)
+- [Current Features](#current-features)
+- [Technology Stack](#technology-stack)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Usage](#usage)
   - [Testing](#testing)
+- [Planned Roadmap](#planned-roadmap)
+- [Team](#team)
+- [Disclaimer](#disclaimer)
+- [Feedback](#feedback)
 
 ---
 
 ## Overview
 
-Atlas is a comprehensive developer toolset designed to facilitate the creation of interactive, map-centric web applications built with Next.js and React. It provides a scalable architecture for geographic data visualization, real-time routing, and location-based features, making it ideal for campus navigation, geographic dashboards, or any location-aware platform.
+**UniWay** is a campus navigation web application built specifically for **Manipal University Jaipur (MUJ)**.  
+This is the **first public demo release**, aimed at showcasing the core navigation experience and setting the stage for future enhancements.  
 
-### Why Atlas?
+UniWay provides MUJ students, faculty, and visitors with an **interactive campus map**, **real-time search**, and **dynamic location information** — all powered by a modern, scalable architecture.
 
-This project empowers developers to build dynamic, user-friendly mapping experiences with ease. The core features include:
+---
 
-* 🚀 **Routing & Navigation:** Interactive maps with real-time routing and geolocation support.
-* 📊 **Location Data API:** Modular endpoints for dynamic access to location details.
-* 🎨 **Styling & Layout:** Seamless integration with Tailwind CSS and custom layouts for consistent UI.
-* ⚙️ **Configurable Development:** Flexible configs for development, deployment, and code quality.
-* 🧩 **Modular Architecture:** Well-structured codebase supporting scalable and maintainable projects.
+## Current Features
+
+### 🗺️ Core Navigation & Mapping
+- **Interactive Campus Map:** Smooth panning and zooming with Leaflet for exploring MUJ.
+- **Dynamic Location Markers:** Key campus locations fetched from a live backend API, with clickable details.
+- **Simple Path Routing:** Proof-of-concept path display from current location to destination.
+
+### 🔍 Search & Discovery
+- **Real-time Predictive Search:** Instant, case-insensitive suggestions while typing.
+- **Location Cards:** Curated list of important places, complete with images and key details.
+
+### ⏱ Real-time Information
+- **Live Location Status:** Data served from a central API for up-to-date hours and open/closed status.
+- **Decoupled Architecture:** Backend updates instantly reflected without requiring user updates.
+
+---
+
+## Technology Stack
+
+### 🖥 Frontend
+- **Next.js (React Framework):** High performance, file-based routing, and serverless capabilities.
+- **TypeScript:** Strict typing for error prevention and maintainable code.
+- **Tailwind CSS:** Utility-first styling for rapid, responsive UI development.
+- **Leaflet.js:** Lightweight, open-source mapping with custom markers and layers.
+
+### ⚙ Backend & Data
+- **Next.js API Routes:** Serverless endpoints that scale automatically with Vercel.
+- **JSON (Prototype Data) → MongoDB (Planned):** Easy migration path from static data to a live database with admin panel management.
+
+### 🚀 Deployment
+- **Vercel:** CI/CD pipeline — every `git push` deploys a new live build automatically.
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
-
-This project requires the following dependencies:
-* **Programming Language:** TypeScript
-* **Package Manager:** Npm
+- **Programming Language:** TypeScript  
+- **Package Manager:** npm
 
 ### Installation
 
-Build Atlas from the source and install dependencies:
+```bash
+# Clone the repository
+git clone https://github.com/aetosdios27/Atlas_
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/pranav718/Atlas](https://github.com/pranav718/Atlas)
-    ```
-2.  **Navigate to the project directory:**
-    ```bash
-    cd Atlas
-    ```
-3.  **Install the dependencies:**
+# Navigate to the project folder
+cd Atlas_
 
-    Using **npm**:
-    ```bash
-    npm install
-    ```
+# Install dependencies
+npm install
+````
 
 ### Usage
 
-Run the project with:
-
-Using **npm**:
 ```bash
 npm start
+```
+
+### Testing
+
+```bash
+npm test
+```
+
+---
+
+## Planned Roadmap
+
+* Mobile and tablet optimization
+* Turn-by-turn navigation
+* Indoor navigation for academic blocks
+* Event location tagging
+* Live route ETA calculations
+* Admin panel for real-time campus data updates
+
+---
+
+## Team
+
+**Team Name:** Atlas
+**Members:**
+
+* Manavi Mutyalwar
+* Pushpendra Singh
+* Pranav Ray
+* Akshat Singh
+
+---
+
+## Disclaimer
+
+UniWay is **currently optimized for PC/Desktop displays**.
+Mobile and tablet support is planned for a future release.
+This is the **first demo release** — expect some limitations as we collect feedback and refine features.
+
+---
+
+## Feedback
+
+If you are part of MUJ and testing UniWay:
+
+* **Report Bugs:** [GitHub Issues](https://github.com/aetosdios27/Atlas_/issues)
+* **Feature Suggestions:** Create a new issue with the `enhancement` label
+* **Contact Dev Team:** Open a discussion in the GitHub Discussions tab
+
+---
+
+↑ [**Back to Top**](#uniway--muj-campus-navigation)
+
+```
+
