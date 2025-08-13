@@ -5,7 +5,6 @@
     }
   },
   "crons": [],
-  "overrides": [],
   "routes": [],
   "functions": {},
   "framework": "nextjs",
