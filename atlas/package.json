@@ -1,33 +1,89 @@
 {
   
   "name": "atlas",
+  
   "version": "0.1.0",
+  
   "private": true,
+  
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+  
+    
+  "dev": "next dev",
+  
+    
+  "build": "next build",
+  
+    
+  "start": "next start",
+  
+    
+  "lint": "next lint"
+  
   },
+  
   "dependencies": {
-    "@googlemaps/js-api-loader": "^1.16.10",
-    "leaflet": "^1.9.4",
-    "leaflet-routing-machine": "^3.2.12",
-    "next": "15.4.6",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-leaflet": "^5.0.0"
+  
+    
+  "@googlemaps/js-api-loader": "^1.16.10",
+  
+    
+  "@prisma/client": "^6.14.0",
+  
+    
+  "leaflet": "^1.9.4",
+  
+    
+  "leaflet-routing-machine": "^3.2.12",
+  
+    
+  "next": "15.4.6",
+  
+    
+  "prisma": "^6.14.0",
+  
+    
+  "react": "19.1.0",
+  
+    
+  "react-dom": "19.1.0",
+  
+    
+  "react-leaflet": "^5.0.0"
+  
   },
+  
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4",
-    "@types/leaflet": "^1.9.20",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.4.6",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+  
+    
+  "@eslint/eslintrc": "^3",
+  
+    
+  "@tailwindcss/postcss": "^4",
+  
+    
+  "@types/leaflet": "^1.9.20",
+  
+    
+  "@types/node": "^20",
+  
+    
+  "@types/react": "^19",
+  
+    
+  "@types/react-dom": "^19",
+  
+    
+  "eslint": "^9",
+  
+    
+  "eslint-config-next": "15.4.6",
+  
+    
+  "tailwindcss": "^4",
+  
+    
+  "typescript": "^5"
+  
   }
 }
