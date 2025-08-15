@@ -18,7 +18,10 @@
   "start": "next start",
   
     
-  "lint": "next lint"
+  "lint": "next lint",
+  
+    
+  "seed": "tsx prisma/seed.ts"
   
   },
   
@@ -65,7 +68,7 @@
   "@types/leaflet": "^1.9.20",
   
     
-  "@types/node": "^20",
+  "@types/node": "^20.19.11",
   
     
   "@types/react": "^19",
@@ -81,6 +84,12 @@
   
     
   "tailwindcss": "^4",
+  
+    
+  "ts-node": "^10.9.2",
+  
+    
+  "tsx": "^4.20.4",
   
     
   "typescript": "^5"
