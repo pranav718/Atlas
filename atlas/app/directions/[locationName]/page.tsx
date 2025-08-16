@@ -21,26 +21,34 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locationError, setLocationError] = useState<string>('');
   const [locationData, setLocationData] = useState<LocationData | null>(null);
+  const router = useRouter();
 
+  // Move the params processing to a separate useEffect
   useEffect(() => {
-    try {
-      // Remove React.use as it's causing issues
-      const decodedData = decodeURIComponent(params.locationName);
-      const parsedData = JSON.parse(decodedData);
-      
-      if (!parsedData.name || !Array.isArray(parsedData.coordinates) || parsedData.coordinates.length !== 2) {
-        throw new Error('Invalid location data format');
-      }
+    const processLocationData = () => {
+      try {
+        const decodedData = decodeURIComponent(params.locationName);
+        const parsedData = JSON.parse(decodedData);
+        
+        if (!parsedData.name || !Array.isArray(parsedData.coordinates) || parsedData.coordinates.length !== 2) {
+          throw new Error('Invalid location data format');
+        }
 
-      setLocationData({
-        name: parsedData.name,
-        coordinates: [Number(parsedData.coordinates[0]), Number(parsedData.coordinates[1])]
-      });
-    } catch (error) {
-      console.error('Error parsing location data:', error);
-      setLocationError('Invalid location data provided.');
+        setLocationData({
+          name: parsedData.name,
+          coordinates: [Number(parsedData.coordinates[0]), Number(parsedData.coordinates[1])]
+        });
+      } catch (error) {
+        console.error('Error parsing location data:', error);
+        setLocationError('Invalid location data provided.');
+      }
+    };
+
+    // Only process if params.locationName exists
+    if (params.locationName) {
+      processLocationData();
     }
-  }, [params.locationName]);
+  }, [params]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'geolocation' in navigator) {
@@ -58,7 +66,6 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
     }
   }, []);
 
-  const router = useRouter();
   return (
     <div className="flex flex-col h-screen">
       <div className="h-[40px] bg-[#7A96D5] flex items-center px-4">
@@ -82,7 +89,7 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
           <MapWithRouting 
             userLocation={userLocation} 
             destination={locationData.coordinates}
-            //locationName={locationData.name}
+            locationName={locationData.name}
           />
         )}
       </div>
