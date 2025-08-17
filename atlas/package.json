@@ -37,6 +37,9 @@
   "@types/leaflet-routing-machine": "^3.2.8",
   
     
+  "framer-motion": "^12.23.12",
+  
+    
   "leaflet": "^1.9.4",
   
     
