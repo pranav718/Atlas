@@ -18,7 +18,7 @@ const BUILDINGS_WITH_FLOOR_PLANS = [
   "Academic Block 1 (AB1)",
   "Academic Block 2 (AB2)",
   "Academic Block 3 (AB3)",
-  "LECTURE HALL COMPLEX"
+  "Lecture Hall Complex"
 ];
 
 interface FloorSelectorProps {

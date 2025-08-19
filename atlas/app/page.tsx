@@ -174,7 +174,7 @@ export default function Home() {
             mostVisited={["Design Studios", "Tech Labs", "Project Rooms"]}
           />
           <Card
-            title="LECTURE HALL COMPLEX"
+            title="Lecture Hall Complex"
             imageUrl="/LHC.jpeg"
             coordinates={[26.84432342141948, 75.56480585671513]}
             mostVisited={["Auditoriums", "Conference Rooms", "Foyer"]}
