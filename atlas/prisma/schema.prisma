@@ -19,3 +19,11 @@ model Location {
   hours       String
   status      String
 }
+
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
