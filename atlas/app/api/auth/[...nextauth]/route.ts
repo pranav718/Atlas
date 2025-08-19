@@ -1,13 +1,19 @@
-// In app/api/auth/[...nextauth]/route.ts
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 import { PrismaClient } from '@prisma/client';
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-const handler = NextAuth({
+const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma) as any,
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -23,12 +29,15 @@ const handler = NextAuth({
           where: { email: credentials.email },
         });
 
-        if (user && (await bcrypt.compare(credentials.password, user.password))) {
-          // Return user object without the password
-          return { id: user.id, name: user.name, email: user.email };
+        if (user && user.password && (await bcrypt.compare(credentials.password, user.password))) {
+          return { 
+            id: user.id, 
+            name: user.name, 
+            email: user.email,
+            image: user.image 
+          };
         }
         
-        // Return null if user not found or password doesn't match
         return null;
       },
     }),
@@ -36,10 +45,30 @@ const handler = NextAuth({
   session: {
     strategy: 'jwt',
   },
+  callbacks: {
+    async jwt({ token, user, account }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.id as string;
+        session.user.email = token.email as string;
+        session.user.name = token.name as string;
+      }
+      return session;
+    },
+  },
   secret: process.env.AUTH_SECRET,
   pages: {
-    signIn: '/login', // Redirect users to your custom login page
+    signIn: '/login',
   },
-});
+};
+
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
