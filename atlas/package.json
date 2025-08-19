@@ -37,6 +37,9 @@
   "@types/leaflet-routing-machine": "^3.2.8",
   
     
+  "bcryptjs": "^3.0.2",
+  
+    
   "framer-motion": "^12.23.12",
   
     
@@ -47,6 +50,9 @@
   
     
   "next": "15.4.6",
+  
+    
+  "next-auth": "^4.24.11",
   
     
   "prisma": "^6.14.0",
@@ -69,6 +75,9 @@
   
     
   "@tailwindcss/postcss": "^4",
+  
+    
+  "@types/bcryptjs": "^2.4.6",
   
     
   "@types/leaflet": "^1.9.20",
