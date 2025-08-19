@@ -16,6 +16,12 @@ const Header: React.FC = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
+  React.useEffect(() => {
+    console.log('Auth Status:', status);
+    console.log('Session:', session);
+  }, [status, session]);
+
+  
   return (
     <header className="relative">
       {/* Blue header strip with auth buttons */}
