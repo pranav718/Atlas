@@ -1,33 +1,29 @@
 import { NextResponse } from 'next/server';
-import path from 'path';
-import { promises as fs } from 'fs';
+import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/lib/prisma';
 
-interface Location {
-  id: number;
-  name: string;
-  coordinates: [number,number];
-  hours: string;
-  status: string;
-}
+export async function GET() {
+  try {
+    const locations = await prisma.location.findMany({
+      orderBy: {
+        locationId: 'asc'
+      }
+    });
 
-export async function GET(): Promise<NextResponse<Location[] | {error: string}>>  {
-  try{
-    const jsonDirectory = path.join(process.cwd(), 'app','data');
+    const formattedLocations = locations.map(loc => ({
+      id: loc.locationId,
+      name: loc.name,
+      coordinates: loc.coordinates,
+      hours: loc.hours,
+      status: loc.status
+    }));
 
-    const fileContents = await fs.readFile(jsonDirectory + '/locations.json', 'utf8');
-
-    const locations: Location[] = JSON.parse(fileContents);
-    
-    return NextResponse.json(locations);
-  }
-  catch(error){
-    
-    console.error("failed to read locations.json", error);
+    return NextResponse.json(formattedLocations);
+  } catch (error) {
+    console.error("Failed to fetch locations from database", error);
     return NextResponse.json(
-      {error: "internal server error"},
-      {status: 500}
+      { error: "Internal server error" },
+      { status: 500 }
     );
-
   }
-
 }
