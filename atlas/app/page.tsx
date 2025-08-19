@@ -3,6 +3,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import locationsData from '../data/locations.json';
 import Card from './components/Card';
+import { useSession, signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+
 
 type Location = {
   id: number;
@@ -132,17 +135,57 @@ if (typeof window !== 'undefined') {
   }
 }
 
-const Header: React.FC = () => (
-  <header className="relative">
-    {/* Blue header strip */}
-    <div className="h-[40px] bg-[#7A96D5] flex items-center px-4"></div>
-    {/* Cyan background with centered logo */}
-    <div className="h-[200px] bg-[#88DBE7] flex flex-col items-center justify-end relative">
-      <img src="/uniway.svg" alt="Uniway Logo" className="h-[120px] mb-16 mx-auto" />
-    </div>
-    <SearchBar />
-  </header>
-);
+const Header: React.FC = () => {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  return (
+    <header className="relative">
+      {/* Blue header strip with auth buttons */}
+      <div className="h-[40px] bg-[#7A96D5] flex items-center justify-between px-4">
+        <div></div> {/* Empty div for spacing */}
+        <div className="flex gap-3">
+          {status === 'loading' ? (
+            <div className="text-white">Loading...</div>
+          ) : session ? (
+            <>
+              <span className="text-white flex items-center">
+                Welcome, {session.user?.name || session.user?.email}
+              </span>
+              <button
+                onClick={() => signOut()}
+                className="bg-white text-[#7A96D5] px-4 py-1.5 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors"
+              >
+                Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                onClick={() => router.push('/login')}
+                className="bg-white text-[#7A96D5] px-4 py-1.5 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors"
+              >
+                Login
+              </button>
+              <button
+                onClick={() => router.push('/register')}
+                className="bg-white text-[#7A96D5] px-4 py-1.5 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors"
+              >
+                Sign Up
+              </button>
+            </>
+          )}
+        </div>
+      </div>
+      {/* Cyan background with centered logo */}
+      <div className="h-[200px] bg-[#88DBE7] flex flex-col items-center justify-end relative">
+        <img src="/uniway.svg" alt="Uniway Logo" className="h-[120px] mb-16 mx-auto" />
+      </div>
+      <SearchBar />
+    </header>
+  );
+};
+
 
 const Footer: React.FC = () => (
   <footer className="h-[80px] bg-[#7A96D5]"></footer>
