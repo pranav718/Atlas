@@ -6,12 +6,6 @@ import { useRouter } from 'next/navigation';
 import Card from './components/Card';
 import SearchBar from './components/SearchBar';  // <-- Add this import
 
-// Remove these - they're now in SearchBar.tsx:
-// - type Location
-// - getRandomSuggestions function
-// - SearchBar component
-// - Custom style injection code
-
 const Header: React.FC = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
