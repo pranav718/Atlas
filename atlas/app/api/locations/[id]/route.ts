@@ -1,22 +1,22 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }  // Note: params is now a Promise
 ) {
   try {
-    const id = parseInt(params.id);
+    const { id } = await params;  // Await the params
+    const locationId = parseInt(id);
     
     const location = await prisma.location.findUnique({
       where: {
-        locationId: id
+        locationId: locationId
       }
     });
 
     if (location) {
-
+      // Transform to match existing format
       const formattedLocation = {
         id: location.locationId,
         name: location.name,
