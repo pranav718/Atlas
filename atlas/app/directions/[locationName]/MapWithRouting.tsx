@@ -143,7 +143,7 @@ const FloorPlanViewer: React.FC<FloorPlanViewerProps> = ({ floor, buildingName, 
               </div>
             )}
             
-            {/* eslint-disable-next-line @next/next/no-img-element */}
+            { }
             
             {!imageError ? (
               
