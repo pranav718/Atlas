@@ -25,7 +25,7 @@ const Header: React.FC = () => {
       <div className="h-[50px] bg-white/90 backdrop-blur-sm flex items-center justify-between px-8 shadow-sm">
         <div className="flex items-center gap-2">
           <motion.img 
-            src="/uniway.svg" 
+            src="/uniway_new.svg" 
             alt="Uniway" 
             className="h-8"
             whileHover={{ scale: 1.05 }}
@@ -51,7 +51,7 @@ const Header: React.FC = () => {
 
 const HeroSection: React.FC = () => {
   return (
-    <section className="relative bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 text-white overflow-hidden">
+    <section className="relative bg-gradient-to-br from-blue-700 via-[#369be1] to-cyan-300 text-white overflow-hidden">
       {/* Animated background pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -73,7 +73,7 @@ const HeroSection: React.FC = () => {
                 Uniway
               </span>
             </h1>
-            <p className="text-xl text-purple-100 mb-8 leading-relaxed">
+            <p className="text-xl text-white mb-8 leading-relaxed">
               Your smart campus companion. Find buildings, discover shortest routes, 
               and explore every corner of Manipal University Jaipur with ease.
             </p>
@@ -93,8 +93,8 @@ const HeroSection: React.FC = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 + index * 0.1 }}
                 >
-                  <feature.icon className="w-5 h-5 text-purple-200" />
-                  <span className="text-purple-100">{feature.text}</span>
+                  <feature.icon className="w-5 h-5 text-white" />
+                  <span className="text-white">{feature.text}</span>
                 </motion.div>
               ))}
             </div>
@@ -129,7 +129,7 @@ const HeroSection: React.FC = () => {
             >
               <div className="absolute inset-0 bg-white/20 blur-3xl rounded-full" />
               <img 
-                src="/uniway.svg" 
+                src="/uniway_new.svg" 
                 alt="Uniway Logo" 
                 className="h-64 lg:h-80 relative z-10"
               />
@@ -214,7 +214,7 @@ const BuildingsSection: React.FC = () => {
 
 const Footer: React.FC = () => (
   <motion.footer 
-    className="bg-purple-800 text-white py-12"
+    className="bg-blue-700 text-white py-12"
     initial={{ opacity: 0 }}
     whileInView={{ opacity: 1 }}
     viewport={{ once: true }}
@@ -224,10 +224,10 @@ const Footer: React.FC = () => (
       <div className="flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center gap-3 mb-4 md:mb-0">
           <img src="/uniway.svg" alt="Uniway" className="h-10" />
-          <span className="text-lg font-semibold">Uniway</span>
+          <span className="text-lg font-semibold text-white">Uniway</span>
         </div>
-        <p className="text-purple-200 text-sm">
-          Made with fuckass love by team atlas
+        <p className="text-white text-sm">
+          Made with love by team Atlas
         </p>
       </div>
     </div>
