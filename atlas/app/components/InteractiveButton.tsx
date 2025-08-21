@@ -1,29 +1,40 @@
-// In app/components/InteractiveButton.tsx
 "use client";
 
-import { InteractiveHoverButton } from "app/components/magicui/interactive-hover-button";
-import { useRouter } from "next/navigation";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 interface InteractiveButtonProps {
   text: string;
   route: string;
+  variant?: 'primary' | 'secondary';
 }
 
-const InteractiveButton: React.FC<InteractiveButtonProps> = ({ text, route }) => {
+const InteractiveButton: React.FC<InteractiveButtonProps> = ({ 
+  text, 
+  route, 
+  variant = 'secondary' 
+}) => {
   const router = useRouter();
 
-  const handleClick = () => {
-    router.push(route);
-  };
+  const isPrimary = variant === 'primary';
 
   return (
-    <InteractiveHoverButton
-      containerClassName="w-auto h-auto"
-      itemClassName="px-4 py-1.5 rounded-md text-sm font-medium bg-white text-[#7A96D5]"
-      onClick={handleClick}
+    <motion.button
+      className={`px-6 py-2 rounded-full font-medium transition-all ${
+        isPrimary
+          ? 'bg-purple-600 text-white hover:bg-purple-700'
+          : 'bg-transparent text-purple-600 border border-purple-600 hover:bg-purple-600 hover:text-white'
+      }`}
+      onClick={() => router.push(route)}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
     >
-      <span>{text}</span>
-    </InteractiveHoverButton>
+      {text}
+    </motion.button>
   );
 };
 

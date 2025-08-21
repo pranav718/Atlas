@@ -5,6 +5,8 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import { MapContainer, Marker, Popup, TileLayer, useMap, ZoomControl } from 'react-leaflet';
 import { useSession } from 'next-auth/react';
+import { Star } from 'lucide-react';
+import { motion } from 'framer-motion'; 
 
 // Fix for default markers
 delete (L.Icon.Default.prototype as L.Icon.Default & { _getIconUrl?: () => string })._getIconUrl;
@@ -294,7 +296,6 @@ const FavoriteButton = ({ locationId, locationName }: { locationId: number, loca
   const { data: session } = useSession();
   const [isFavorite, setIsFavorite] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
 
   useEffect(() => {
     if (session) {
@@ -342,42 +343,19 @@ const FavoriteButton = ({ locationId, locationName }: { locationId: number, loca
   if (!session) return null;
 
   return (
-    <div className="absolute bottom-[140px] right-[10px] z-[1000]">
-      <button
-        onClick={toggleFavorite}
-        disabled={loading}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-        className="bg-white p-2.5 rounded-md shadow-lg hover:bg-gray-100 transition-colors border-2 border-gray-200 relative"
-        aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-      >
-        {loading ? (
-          <div className="w-5 h-5 animate-spin rounded-full border-2 border-gray-300 border-t-[#7A96D5]"></div>
-        ) : (
-          <svg 
-            className={`w-5 h-5 ${isFavorite ? 'text-red-500 fill-current' : 'text-gray-600'} transition-colors`} 
-            fill={isFavorite ? 'currentColor' : 'none'} 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth="2" 
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
-            />
-          </svg>
-        )}
-      </button>
-      
-      {/* Tooltip */}
-      {showTooltip && !loading && (
-        <div className="absolute bottom-full right-0 mb-2 px-3 py-1.5 bg-gray-800 text-white text-xs rounded-lg whitespace-nowrap">
-          {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-          <div className="absolute top-full right-3 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-800"></div>
-        </div>
-      )}
-    </div>
+    <motion.button
+      onClick={toggleFavorite}
+      disabled={loading}
+      className="absolute top-20 right-4 z-[1000] bg-white p-3 rounded-lg shadow-lg hover:shadow-xl transition-all"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      title={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+    >
+      <Star 
+        size={20} 
+        className={`transition-colors ${isFavorite ? 'text-yellow-500 fill-current' : 'text-gray-400'}`}
+      />
+    </motion.button>
   );
 };
 
