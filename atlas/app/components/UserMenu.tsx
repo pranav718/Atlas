@@ -72,7 +72,7 @@ const UserMenu: React.FC = () => {
   return (
     <div className="relative" ref={menuRef}>
       <motion.button
-        className="flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 text-purple-700 hover:bg-purple-200 transition-colors"
+        className="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 text-blue-700 hover:bg-blue-200 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
@@ -99,7 +99,7 @@ const UserMenu: React.FC = () => {
             transition={{ duration: 0.2 }}
           >
             {/* User info header */}
-            <div className="bg-gradient-to-r from-purple-600 to-purple-700 p-4 text-white">
+            <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-white">
               <div className="flex items-center gap-3">
                 {session?.user?.image ? (
                   <img 
@@ -164,7 +164,7 @@ const UserMenu: React.FC = () => {
                             onClick={() => navigateToLocation(location)}
                             className="w-full text-left py-2 px-3 text-sm hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-2 group"
                           >
-                            <MapPin size={14} className="text-purple-500 group-hover:text-purple-600" />
+                            <MapPin size={14} className="text-blue-500 group-hover:text-blue-600" />
                             <span className="text-gray-700 group-hover:text-gray-900">{location.name}</span>
                           </button>
                         ))}
