@@ -7,7 +7,7 @@ import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as ReturnType<typeof PrismaAdapter>, // Fix: Replace 'any' with proper type
   providers: [
     GoogleProvider({

@@ -104,7 +104,8 @@ const SearchBar: React.FC = () => {
                     coordinates: [
                       Number(loc.coordinates[0]),
                       Number(loc.coordinates[1])
-                    ] as [number, number]
+                    ] as [number, number],
+                    id: loc.id // Add this line
                   };
                   
                   const encodedData = encodeURIComponent(JSON.stringify(locationData));

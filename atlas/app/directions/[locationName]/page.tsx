@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 interface LocationData {
   name: string;
   coordinates: [number, number];
+  id?: number; // Add id field
 }
 
 interface DirectionsPageProps {
@@ -21,11 +22,11 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locationError, setLocationError] = useState<string>('');
   const [locationData, setLocationData] = useState<LocationData | null>(null);
+  const [locationId, setLocationId] = useState<number | null>(null);
   const router = useRouter();
 
-  // Move the params processing to a separate useEffect
   useEffect(() => {
-    const processLocationData = () => {
+    const processLocationData = async () => {
       try {
         const decodedData = decodeURIComponent(params.locationName);
         const parsedData = JSON.parse(decodedData);
@@ -36,15 +37,33 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
 
         setLocationData({
           name: parsedData.name,
-          coordinates: [Number(parsedData.coordinates[0]), Number(parsedData.coordinates[1])]
+          coordinates: [Number(parsedData.coordinates[0]), Number(parsedData.coordinates[1])],
+          id: parsedData.id
         });
+
+        // Fetch location ID if not provided
+        if (!parsedData.id) {
+          try {
+            const res = await fetch('/api/locations');
+            if (res.ok) {
+              const locations = await res.json();
+              const location = locations.find((loc: any) => loc.name === parsedData.name);
+              if (location) {
+                setLocationId(location.id);
+              }
+            }
+          } catch (error) {
+            console.error('Error fetching location ID:', error);
+          }
+        } else {
+          setLocationId(parsedData.id);
+        }
       } catch (error) {
         console.error('Error parsing location data:', error);
         setLocationError('Invalid location data provided.');
       }
     };
 
-    // Only process if params.locationName exists
     if (params.locationName) {
       processLocationData();
     }
@@ -85,11 +104,12 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
         </div>
       )}
       <div className="flex-1">
-        {userLocation && locationData && (
+        {userLocation && locationData && locationId && (
           <MapWithRouting 
             userLocation={userLocation} 
             destination={locationData.coordinates}
             locationName={locationData.name}
+            locationId={locationId}
           />
         )}
       </div>

@@ -1,6 +1,6 @@
 "use client"; 
 
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import { BorderBeam } from './magicui/border-beam';
 
@@ -15,26 +15,46 @@ interface CardProps {
 
 const Card: React.FC<CardProps> = ({ title, imageUrl, coordinates, mostVisited }) => {
     const router = useRouter();
+    const [locationId, setLocationId] = useState<number | null>(null);
+
+    useEffect(() => {
+      // Fetch location ID
+      const fetchLocationId = async () => {
+        try {
+          const res = await fetch('/api/locations');
+          if (res.ok) {
+            const locations = await res.json();
+            const location = locations.find((loc: any) => loc.name === title);
+            if (location) {
+              setLocationId(location.id);
+            }
+          }
+        } catch (error) {
+          console.error('Error fetching location ID:', error);
+        }
+      };
+      
+      fetchLocationId();
+    }, [title]);
 
     // Helper to encode location data
-    const encodeLocation = (name: string, coords: [number, number]) => {
-      return encodeURIComponent(JSON.stringify({ name, coordinates: coords }));
+    const encodeLocation = (name: string, coords: [number, number], id?: number) => {
+      return encodeURIComponent(JSON.stringify({ name, coordinates: coords, id }));
     };
 
     // Card click: go to map with this card's location
     const handleCardClick = () => {
-      const encodedData = encodeLocation(title, coordinates);
+      const encodedData = encodeLocation(title, coordinates, locationId || undefined);
       router.push(`/directions/${encodedData}`);
     };
 
     // Most visited click: try to find coordinates for sub-place, else fallback to card's coordinates
     const handleLinkClick = (place: string) => {
-      // Try to find coordinates for sub-place (if available in locationsData)
-      // For now, fallback to card's coordinates
-      const encodedData = encodeLocation(place, coordinates);
+      const encodedData = encodeLocation(place, coordinates, locationId || undefined);
       router.push(`/directions/${encodedData}`);
     };
 
+    // ... rest of the component remains the same
   
     return (
     <div className="relative w-full h-[250px] rounded-lg overflow-hidden shadow-lg group cursor-pointer"
