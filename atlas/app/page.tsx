@@ -4,7 +4,8 @@ import React from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Card from './components/Card';
-import SearchBar from './components/SearchBar';  // <-- Add this import
+import SearchBar from './components/SearchBar';
+import UserMenu from './components/UserMenu';
 
 const Header: React.FC = () => {
   const { data: session, status } = useSession();
@@ -15,27 +16,16 @@ const Header: React.FC = () => {
     console.log('Session:', session);
   }, [status, session]);
 
-  
   return (
     <header className="relative">
       {/* Blue header strip with auth buttons */}
       <div className="h-[40px] bg-[#7A96D5] flex items-center justify-between px-4">
         <div></div> {/* Empty div for spacing */}
-        <div className="flex gap-3">
+        <div className="flex gap-3 items-center">
           {status === 'loading' ? (
-            <div className="text-white">Loading...</div>
+            <div className="text-white text-sm">Loading...</div>
           ) : session ? (
-            <>
-              <span className="text-white flex items-center">
-                Welcome, {session.user?.name || session.user?.email}
-              </span>
-              <button
-                onClick={() => signOut()}
-                className="bg-white text-[#7A96D5] px-4 py-1.5 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors"
-              >
-                Sign Out
-              </button>
-            </>
+            <UserMenu />
           ) : (
             <>
               <button
@@ -58,7 +48,7 @@ const Header: React.FC = () => {
       <div className="h-[200px] bg-[#88DBE7] flex flex-col items-center justify-end relative">
         <img src="/uniway.svg" alt="Uniway Logo" className="h-[120px] mb-16 mx-auto" />
       </div>
-      <SearchBar />  {/* This now uses the imported component */}
+      <SearchBar />
     </header>
   );
 };
@@ -71,7 +61,7 @@ export default function Home() {
   return (
     <div className="flex flex-col h-screen">
       <Header />
-
+      
       <main className="flex-1 bg-gray-200 flex items-center justify-center">
         <div className="bg-white rounded-lg shadow-lg w-full max-w-7xl my-3 p-10 grid grid-cols-2 gap-x-32 gap-y-20">
           <Card

@@ -15,7 +15,7 @@ type LocationData = {
 async function main() {
   console.log(`Start seeding ...`);
 
-  // ✨ FIX: Clear existing data to prevent duplicate errors on re-seeding
+
   await prisma.location.deleteMany({});
   console.log('Deleted existing locations.');
 
@@ -24,7 +24,7 @@ async function main() {
   for (const l of locations) {
     const location = await prisma.location.create({
       data: {
-        locationId: l.id, // ✨ FIX: Map the JSON 'id' to the 'locationId' field
+        locationId: l.id, 
         name: l.name,
         coordinates: l.coordinates,
         hours: l.hours,
