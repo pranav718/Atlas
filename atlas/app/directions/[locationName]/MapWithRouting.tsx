@@ -182,9 +182,48 @@ const DestinationMarker = ({ position, locationName, onViewFloorPlans }: {
   locationName: string,
   onViewFloorPlans: () => void
 }) => {
-    // ... (code for this component is unchanged)
-    return <Marker position={position}><Popup>{locationName}</Popup></Marker>;
+  const hasFloorPlans = BUILDINGS_WITH_FLOOR_PLANS.includes(locationName);
+  const markerRef = useRef<L.Marker>(null);
+
+  useEffect(() => {
+    if (markerRef.current) {
+      markerRef.current.openPopup();
+    }
+  }, []);
+
+  return (
+    <Marker 
+      position={position}
+      ref={markerRef}
+      eventHandlers={{
+        popupclose: () => {
+          setTimeout(() => {
+            markerRef.current?.openPopup();
+          }, 100);
+        }
+      }}
+    >
+      <Popup closeButton={false}>
+        <div className="flex flex-col items-center gap-2">
+          <p className="font-semibold">{locationName}</p>
+          {hasFloorPlans && (
+            <button 
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                onViewFloorPlans();
+              }}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+            >
+              View Floor Plans
+            </button>
+          )}
+        </div>
+      </Popup>
+    </Marker>
+  );
 };
+
 
 
 // ✨ NEW: Component for the "Recenter" button
