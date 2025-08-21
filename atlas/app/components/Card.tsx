@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import { BorderBeam } from './magicui/border-beam';
 
 
 interface CardProps {
@@ -80,6 +81,8 @@ const Card: React.FC<CardProps> = ({ title, imageUrl, coordinates, mostVisited }
           </div>
         )}
       </div>
+      {/* Border Beam */}
+      <BorderBeam size={150} duration={10} delay={0} />
     </div>
   );
 };
