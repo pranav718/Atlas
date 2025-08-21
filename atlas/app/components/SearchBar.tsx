@@ -1,184 +1,106 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Search } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Search, MapPin } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 
 interface SearchBarProps {
   variant?: 'default' | 'hero';
 }
 
-type Location = {
-  id: number;
-  name: string;
-  coordinates: number[];
-  hours: string;
-  status: string;
-};
-
 const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
-  const [isFocused, setIsFocused] = useState(false);
   const [query, setQuery] = useState('');
-  const [suggestions, setSuggestions] = useState<Location[]>([]);
-  const [locations, setLocations] = useState<Location[]>([]);
-  const inputRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [results, setResults] = useState<any[]>([]);
+  const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  const isHero = variant === 'hero';
-
   useEffect(() => {
-    // Fetch locations from API
-    const fetchLocations = async () => {
-      try {
-        const res = await fetch('/api/locations');
-        if (res.ok) {
-          const data = await res.json();
-          setLocations(data);
-        }
-      } catch (error) {
-        console.error('Error fetching locations:', error);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
       }
     };
-    fetchLocations();
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  useEffect(() => {
-    if (query.trim() !== '') {
-      setSuggestions(
-        locations.filter(loc =>
-          loc.name.toLowerCase().includes(query.toLowerCase())
-        ).slice(0, 5)
-      );
-    } else if (isFocused) {
-      // Show random suggestions when focused but no query
-      const shuffled = [...locations].sort(() => 0.5 - Math.random());
-      setSuggestions(shuffled.slice(0, 5));
+  const handleSearch = (value: string) => {
+    setQuery(value);
+    setIsOpen(value.length > 0);
+    
+    // Add your search logic here
+    if (value.length > 0) {
+      // Mock search results - replace with actual search
+      setResults([
+        { id: 1, name: 'Academic Block 1', type: 'Building' },
+        { id: 2, name: 'Library', type: 'Facility' },
+      ]);
     } else {
-      setSuggestions([]);
+      setResults([]);
     }
-  }, [query, isFocused, locations]);
-
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (inputRef.current && !inputRef.current.contains(e.target as Node)) {
-        setIsFocused(false);
-      }
-    }
-    if (isFocused) {
-      document.addEventListener('mousedown', handleClick);
-    }
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, [isFocused]);
-
-  const handleLocationSelect = (location: Location) => {
-    const locationData = {
-      name: location.name,
-      coordinates: location.coordinates as [number, number],
-      id: location.id
-    };
-    const encodedData = encodeURIComponent(JSON.stringify(locationData));
-    router.push(`/directions/${encodedData}`);
-    setQuery('');
-    setIsFocused(false);
   };
 
+  const baseClasses = "relative w-full";
+  const inputClasses = variant === 'hero' 
+    ? "w-full px-6 py-4 pl-14 rounded-full bg-white/90 backdrop-blur-sm text-gray-800 placeholder-gray-500 shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300"
+    : "w-full px-4 py-3 pl-12 rounded-lg bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500";
+
   return (
-    <motion.div 
-      ref={inputRef}
-      className={`relative ${isHero ? 'w-full max-w-lg' : 'absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px]'}`}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.4 }}
-    >
-      <motion.div
-        className={`relative ${isHero ? 'bg-white/10 backdrop-blur-md' : 'bg-white'} rounded-full shadow-lg`}
-        animate={{
-          boxShadow: isFocused 
-            ? isHero 
-              ? '0 0 30px rgba(255, 255, 255, 0.3)' 
-              : '0 0 30px rgba(147, 51, 234, 0.3)'
-            : isHero
-              ? '0 4px 20px rgba(0, 0, 0, 0.1)'
-              : '0 4px 20px rgba(0, 0, 0, 0.1)',
-        }}
-        transition={{ duration: 0.3 }}
-            >
-        <div className="flex items-center">
+    <div className={`${baseClasses} ${variant === 'hero' ? 'static' : 'relative'}`} ref={searchRef}>
+      <div className="relative">
+        <Search className={`absolute left-4 ${variant === 'hero' ? 'top-5' : 'top-3.5'} text-gray-400 w-5 h-5 z-10`} />
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => handleSearch(e.target.value)}
+          onFocus={() => query.length > 0 && setIsOpen(true)}
+          placeholder="Search buildings, facilities, or locations..."
+          className={inputClasses}
+        />
+      </div>
+
+      <AnimatePresence>
+        {isOpen && results.length > 0 && (
           <motion.div
-            className={`pl-5 ${isHero ? 'text-white/70' : 'text-purple-600'}`}
-            animate={{
-              scale: isFocused ? 1.1 : 1,
-            }}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-          >
-            <Search size={20} />
-          </motion.div>
-
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search buildings, rooms, or facilities..."
-            onFocus={() => setIsFocused(true)}
-            className={`w-full px-4 py-4 bg-transparent rounded-full focus:outline-none ${
-              isHero ? 'text-white placeholder-white/60' : 'text-gray-700 placeholder-gray-400'
+            className={`absolute w-full mt-2 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden ${
+              variant === 'hero' ? 'z-[100]' : 'z-50'
             }`}
-          />
-
-          <motion.button
-            className={`mr-2 px-6 py-2 rounded-full font-medium transition-colors ${
-              isHero 
-                ? 'bg-white text-purple-700 hover:bg-purple-50' 
-                : 'bg-purple-600 text-white hover:bg-purple-700'
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            style={{ 
+              maxHeight: '300px', 
+              overflowY: 'auto',
+              ...(variant === 'hero' && { 
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)' 
+              })
+            }}
           >
-            Search
-          </motion.button>
-        </div>
-      </motion.div>
-
-      {/* Suggestions dropdown */}
-      {isFocused && suggestions.length > 0 && (
-        <motion.ul
-          className={`absolute left-0 right-0 mt-2 ${
-            isHero ? 'bg-white' : 'bg-white'
-          } rounded-2xl shadow-xl max-h-60 overflow-auto z-30 w-full`}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-        >
-          {suggestions.map((loc) => (
-            <li
-              key={loc.id}
-              className="px-6 py-3 cursor-pointer hover:bg-purple-50 text-gray-700 flex justify-between items-center transition-colors"
-              onMouseDown={() => handleLocationSelect(loc)}
-            >
-              <span className="font-medium">{loc.name}</span>
-              <svg 
-                width="20px" 
-                height="20px" 
-                viewBox="0 0 24 24" 
-                strokeWidth="1.5" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="text-purple-400"
+            {results.map((result) => (
+              <button
+                key={result.id}
+                onClick={() => {
+                  router.push(`/location/${result.id}`);
+                  setIsOpen(false);
+                  setQuery('');
+                }}
+                className="w-full px-4 py-3 text-left hover:bg-purple-50 flex items-center gap-3 transition-colors border-b border-gray-100 last:border-b-0"
               >
-                <path 
-                  d="M6.00005 19L19 5.99996M19 5.99996V18.48M19 5.99996H6.52005" 
-                  stroke="currentColor" 
-                  strokeWidth="1.5" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </li>
-          ))}
-        </motion.ul>
-      )}
-    </motion.div>
+                <MapPin className="w-4 h-4 text-purple-600" />
+                <div>
+                  <p className="font-medium text-gray-800">{result.name}</p>
+                  <p className="text-sm text-gray-500">{result.type}</p>
+                </div>
+              </button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

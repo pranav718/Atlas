@@ -15,24 +15,30 @@ const Header: React.FC = () => {
   const router = useRouter();
 
   return (
-    <motion.header 
-      className="relative"
+    <motion.header
+      className="relative z-50" // Add z-50 to ensure header is above other content
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
     >
       {/* Top bar with auth buttons */}
-      <div className="h-[50px] bg-white/90 backdrop-blur-sm flex items-center justify-between px-8 shadow-sm">
+      <div className="h-[50px] bg-white/90 backdrop-blur-sm flex items-center justify-between px-8 shadow-sm relative"> {/* Add relative positioning */}
         <div className="flex items-center gap-2">
+<<<<<<< Updated upstream
           <motion.img 
             src="/uniway_new.svg" 
             alt="Uniway" 
+=======
+          <motion.img
+            src="/uniway.svg"
+            alt="Uniway"
+>>>>>>> Stashed changes
             className="h-8"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
         </div>
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-3 items-center relative z-50"> {/* Add relative z-50 */}
           {status === 'loading' ? (
             <div className="text-purple-600 text-sm">Loading...</div>
           ) : session ? (
@@ -51,9 +57,13 @@ const Header: React.FC = () => {
 
 const HeroSection: React.FC = () => {
   return (
+<<<<<<< Updated upstream
     <section className="relative bg-gradient-to-br from-blue-700 via-[#369be1] to-cyan-300 text-white overflow-hidden">
+=======
+    <section className="relative bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 text-white"> {/* Remove overflow-hidden */}
+>>>>>>> Stashed changes
       {/* Animated background pattern */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10 overflow-hidden"> {/* Add overflow-hidden here instead */}
         <div className="absolute inset-0" style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }} />
@@ -66,6 +76,7 @@ const HeroSection: React.FC = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative" // Add relative positioning
           >
             <h1 className="text-5xl lg:text-6xl font-bold mb-6">
               Navigate MUJ with{' '}
@@ -99,11 +110,13 @@ const HeroSection: React.FC = () => {
               ))}
             </div>
 
-            {/* Search bar in hero */}
+            {/* Search bar in hero - with overflow visible container */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
+              className="relative z-40" // Increase z-index
+              style={{ minHeight: '60px' }} // Add min-height to prevent layout shift
             >
               <SearchBar variant="hero" />
             </motion.div>
@@ -117,7 +130,7 @@ const HeroSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <motion.div
-              className="relative"
+              className="relative z-0" // Lower z-index for logo
               animate={{ 
                 y: [0, -10, 0],
               }}
@@ -139,7 +152,7 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* Wave separator */}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="absolute bottom-0 left-0 right-0 z-0"> {/* Add z-0 */}
         <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f3f4f6"/>
         </svg>
@@ -147,6 +160,7 @@ const HeroSection: React.FC = () => {
     </section>
   );
 };
+
 
 const BuildingsSection: React.FC = () => {
   const buildings = [
