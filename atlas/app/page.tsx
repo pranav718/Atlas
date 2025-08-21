@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import Card from './components/Card';
 import SearchBar from './components/SearchBar';
 import UserMenu from './components/UserMenu';
+import InteractiveButton from './components/InteractiveButton'; // 👈 Import the new button
 
 const Header: React.FC = () => {
   const { data: session, status } = useSession();
@@ -22,24 +23,16 @@ const Header: React.FC = () => {
       <div className="h-[40px] bg-[#7A96D5] flex items-center justify-between px-4">
         <div></div> {/* Empty div for spacing */}
         <div className="flex gap-3 items-center">
+          
           {status === 'loading' ? (
             <div className="text-white text-sm">Loading...</div>
           ) : session ? (
             <UserMenu />
           ) : (
             <>
-              <button
-                onClick={() => router.push('/login')}
-                className="bg-white text-[#7A96D5] px-4 py-1.5 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors"
-              >
-                Login
-              </button>
-              <button
-                onClick={() => router.push('/register')}
-                className="bg-white text-[#7A96D5] px-4 py-1.5 rounded-md text-sm font-medium hover:bg-gray-100 transition-colors"
-              >
-                Sign Up
-              </button>
+              {/* 👇 Replace the old buttons with the new interactive ones */}
+              <InteractiveButton text="Login" route="/login" />
+              <InteractiveButton text="Sign Up" route="/register" />
             </>
           )}
         </div>
