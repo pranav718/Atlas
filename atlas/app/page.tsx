@@ -39,7 +39,7 @@ const Header: React.FC = () => {
       </div>
       {/* Cyan background with centered logo */}
       <div className="h-[200px] bg-[#88DBE7] flex flex-col items-center justify-end relative">
-        <img src="/uniway.svg" alt="Uniway Logo" className="h-[120px] mb-16 mx-auto" />
+        <img src="/public/uniway.svg" alt="Uniway Logo" className="h-[120px] mb-16 mx-auto" />
       </div>
       <SearchBar />
     </header>
