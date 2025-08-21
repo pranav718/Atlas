@@ -1,6 +1,7 @@
+// app/admin/page.tsx
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Sidebar from '@/app/admin/components/Sidebar';
 import Header from '@/app/admin/components/Header';
@@ -21,7 +22,7 @@ export interface Location {
 }
 
 export interface Event {
-  id: number;
+  id: string;
   name: string;
   time: string;
   location: string;
@@ -31,24 +32,84 @@ export interface Event {
 
 export default function AdminDashboard() {
   const [currentView, setCurrentView] = useState<ViewType>('locations');
-  const [locations, setLocations] = useState<Location[]>([
-    { id: 1, name: 'Academic Block 1', category: 'Academic', status: 'OPEN' },
-    { id: 2, name: 'Food Court 1', category: 'Food', status: 'CLOSE' }
-  ]);
+  const [locations, setLocations] = useState<Location[]>([]);
   const [events, setEvents] = useState<Event[]>([]);
   const [showLocationModal, setShowLocationModal] = useState(false);
   const [showEventModal, setShowEventModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleAddLocation = (location: Omit<Location, 'id'>) => {
-    setLocations([...locations, { ...location, id: Date.now() }]);
-    setShowLocationModal(false);
+  // Fetch locations from API
+  const fetchLocations = async () => {
+    try {
+      const response = await fetch('/admin/api/locations');
+      if (response.ok) {
+        const data = await response.json();
+        setLocations(data.map((loc: any) => ({
+          id: loc.locationId,
+          name: loc.name,
+          category: 'General', // You might want to add category to your schema
+          status: loc.status
+        })));
+      }
+    } catch (error) {
+      console.error('Error fetching locations:', error);
+    }
   };
 
-  const handleAddEvent = (event: Omit<Event, 'id'>) => {
-    setEvents([...events, { ...event, id: Date.now() }]);
-    setShowEventModal(false);
+  // Fetch events from API
+  const fetchEvents = async () => {
+    try {
+      const response = await fetch('/admin/api/events');
+      if (response.ok) {
+        const data = await response.json();
+        setEvents(data);
+      }
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    Promise.all([fetchLocations(), fetchEvents()]).finally(() => {
+      setIsLoading(false);
+    });
+  }, []);
+
+  const handleAddLocation = async (location: Omit<Location, 'id'>) => {
+    try {
+      const response = await fetch('/admin/api/locations', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(location)
+      });
+
+      if (response.ok) {
+        await fetchLocations();
+        setShowLocationModal(false);
+      }
+    } catch (error) {
+      console.error('Error adding location:', error);
+    }
+  };
+
+  const handleAddEvent = async (event: Omit<Event, 'id'>) => {
+    try {
+      const response = await fetch('/admin/api/events', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(event)
+      });
+
+      if (response.ok) {
+        await fetchEvents();
+        setShowEventModal(false);
+      }
+    } catch (error) {
+      console.error('Error adding event:', error);
+    }
   };
 
   const handleDeleteLocation = (id: number) => {
@@ -56,19 +117,47 @@ export default function AdminDashboard() {
     setShowDeleteModal(true);
   };
 
-  const confirmDelete = () => {
+  const confirmDelete = async () => {
     if (itemToDelete) {
-      setLocations(locations.filter(loc => loc.id !== itemToDelete));
-      setShowDeleteModal(false);
-      setItemToDelete(null);
+      try {
+        const response = await fetch(`/admin/api/locations/${itemToDelete}`, {
+          method: 'DELETE'
+        });
+
+        if (response.ok) {
+          await fetchLocations();
+          setShowDeleteModal(false);
+          setItemToDelete(null);
+        }
+      } catch (error) {
+        console.error('Error deleting location:', error);
+      }
     }
   };
 
-  const handleUpdateLocation = (id: number, updates: Partial<Location>) => {
-    setLocations(locations.map(loc => 
-      loc.id === id ? { ...loc, ...updates } : loc
-    ));
+  const handleUpdateLocation = async (id: number, updates: Partial<Location>) => {
+    try {
+      const response = await fetch(`/admin/api/locations/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates)
+      });
+
+      if (response.ok) {
+        await fetchLocations();
+      }
+    } catch (error) {
+      console.error('Error updating location:', error);
+    }
   };
+
+  if (isLoading) {
+    return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="text-purple-600 text-xl">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen">
