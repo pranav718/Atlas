@@ -72,7 +72,7 @@ const LocationsView: React.FC<LocationsViewProps> = ({ locations, onDelete, onUp
                   type="text"
                   value={editName}
                   onChange={(e) => setEditName(e.target.value)}
-                  className="w-full px-3 py-2 border-2 border-purple-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors"
+                  className="w-full px-3 py-2 border-2 border-blue-300 rounded-lg focus:border-blue-500 focus:outline-none transition-colors"
                   autoFocus
                 />
               ) : (
@@ -81,7 +81,7 @@ const LocationsView: React.FC<LocationsViewProps> = ({ locations, onDelete, onUp
             </div>
             
             <div>
-              <span className="px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium">
+              <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
                 {location.category}
               </span>
             </div>
@@ -90,7 +90,7 @@ const LocationsView: React.FC<LocationsViewProps> = ({ locations, onDelete, onUp
               <select
                 value={location.status}
                 onChange={(e) => onUpdate(location.id, { status: e.target.value })}
-                className={`w-full px-4 py-2 rounded-lg font-semibold border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-500 ${getStatusColor(location.status)}`}
+                className={`w-full px-4 py-2 rounded-lg font-semibold border-2 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 ${getStatusColor(location.status)}`}
               >
                 <option value="">Select Status</option>
                 <option value="OPEN">OPEN</option>
@@ -125,7 +125,7 @@ const LocationsView: React.FC<LocationsViewProps> = ({ locations, onDelete, onUp
                 <>
                   <motion.button
                     onClick={() => handleEdit(location)}
-                    className="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded-lg font-semibold flex items-center gap-2 transition-colors"
+                    className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg font-semibold flex items-center gap-2 transition-colors"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
