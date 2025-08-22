@@ -37,7 +37,8 @@ export default function AdminDashboard() {
   const [showLocationModal, setShowLocationModal] = useState(false);
   const [showEventModal, setShowEventModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState<number | null>(null);
+  const [itemToDelete, setItemToDelete] = useState<number | string | null>(null);
+  const [deleteType, setDeleteType] = useState<'location' | 'event'>('location');
   const [isLoading, setIsLoading] = useState(true);
 
   // Fetch locations from API
@@ -49,7 +50,7 @@ export default function AdminDashboard() {
         setLocations(data.map((loc: any) => ({
           id: loc.locationId,
           name: loc.name,
-          category: 'General', // You might want to add category to your schema
+          category: 'General',
           status: loc.status
         })));
       }
@@ -114,23 +115,41 @@ export default function AdminDashboard() {
 
   const handleDeleteLocation = (id: number) => {
     setItemToDelete(id);
+    setDeleteType('location');
+    setShowDeleteModal(true);
+  };
+
+  const handleDeleteEvent = (id: string) => {
+    setItemToDelete(id);
+    setDeleteType('event');
     setShowDeleteModal(true);
   };
 
   const confirmDelete = async () => {
     if (itemToDelete) {
       try {
-        const response = await fetch(`/admin/api/locations/${itemToDelete}`, {
-          method: 'DELETE'
-        });
+        if (deleteType === 'location') {
+          const response = await fetch(`/admin/api/locations/${itemToDelete}`, {
+            method: 'DELETE'
+          });
 
-        if (response.ok) {
-          await fetchLocations();
-          setShowDeleteModal(false);
-          setItemToDelete(null);
+          if (response.ok) {
+            await fetchLocations();
+          }
+        } else if (deleteType === 'event') {
+          const response = await fetch(`/admin/api/events/${itemToDelete}`, {
+            method: 'DELETE'
+          });
+
+          if (response.ok) {
+            await fetchEvents();
+          }
         }
+        
+        setShowDeleteModal(false);
+        setItemToDelete(null);
       } catch (error) {
-        console.error('Error deleting location:', error);
+        console.error(`Error deleting ${deleteType}:`, error);
       }
     }
   };
@@ -174,7 +193,10 @@ export default function AdminDashboard() {
               onUpdate={handleUpdateLocation}
             />
           ) : (
-            <EventsView events={events} />
+            <EventsView 
+              events={events} 
+              onDelete={handleDeleteEvent}
+            />
           )}
           
           {/* Floating Add Button */}
@@ -208,6 +230,7 @@ export default function AdminDashboard() {
         isOpen={showDeleteModal} 
         onClose={() => setShowDeleteModal(false)}
         onConfirm={confirmDelete}
+        itemType={deleteType}
       />
     </div>
   );
