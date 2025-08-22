@@ -134,7 +134,7 @@ const HeroSection: React.FC = () => {
             >
               <div className="absolute inset-0 bg-white/20 blur-3xl rounded-full" />
               <img 
-                src="/uniway_new.svg" 
+                src="/uniwaynew.svg" 
                 alt="Uniway Logo" 
                 className="h-64 lg:h-80 relative z-10"
               />

@@ -219,7 +219,7 @@ export default function LoginPage() {
           {/* RIGHT: brand + tagline + CTA card */}
           <div className="hidden md:flex flex-col items-center md:items-start text-center md:text-left px-2">
             <img
-              src="/uniway.svg"
+              src="/uniwaynew.svg"
               alt="Uniway"
               className="h-24 md:h-28 lg:h-32 mb-6 drop-shadow-[0_6px_24px_rgba(255,255,255,0.35)]"
             />
