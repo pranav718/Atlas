@@ -24,15 +24,10 @@ const Header: React.FC = () => {
       {/* Top bar with auth buttons */}
       <div className="h-[50px] bg-white/90 backdrop-blur-sm flex items-center justify-between px-8 shadow-sm relative"> {/* Add relative positioning */}
         <div className="flex items-center gap-2">
-<<<<<<< Updated upstream
           <motion.img 
             src="/uniway_new.svg" 
             alt="Uniway" 
-=======
-          <motion.img
-            src="/uniway.svg"
-            alt="Uniway"
->>>>>>> Stashed changes
+
             className="h-8"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
@@ -57,11 +52,8 @@ const Header: React.FC = () => {
 
 const HeroSection: React.FC = () => {
   return (
-<<<<<<< Updated upstream
-    <section className="relative bg-gradient-to-br from-blue-700 via-[#369be1] to-cyan-300 text-white overflow-hidden">
-=======
-    <section className="relative bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 text-white"> {/* Remove overflow-hidden */}
->>>>>>> Stashed changes
+    <section className="relative bg-gradient-to-br from-blue-700 via-[#369be1] to-cyan-300 text-white overflow-visible">
+
       {/* Animated background pattern */}
       <div className="absolute inset-0 opacity-10 overflow-hidden"> {/* Add overflow-hidden here instead */}
         <div className="absolute inset-0" style={{
