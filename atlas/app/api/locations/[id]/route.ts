@@ -1,4 +1,3 @@
-// app/admin/api/locations/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 
@@ -6,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function DELETE(
   request: NextRequest,
-  context: any   
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const locationId = context?.params?.id;
+    const { id: locationId } = await params;
 
     if (!locationId) {
       return NextResponse.json({ error: 'Location ID missing' }, { status: 400 });
