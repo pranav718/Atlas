@@ -1,3 +1,4 @@
+// app/admin/components/DeleteEventModal.tsx
 "use client";
 
 import React, { useState } from 'react';
@@ -8,9 +9,10 @@ interface DeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => void;
+  itemType?: 'location' | 'event';
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, onClose, onConfirm }) => {
+const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, onClose, onConfirm, itemType = 'location' }) => {
   const [dontWarnAgain, setDontWarnAgain] = useState(false);
 
   const handleConfirm = () => {
@@ -37,15 +39,16 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, onClose, onConfirm })
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-10"
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              onClick={(e) => e.stopPropagation()}
             >
+          <motion.div
+                className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-10"
+                initial={{ scale: 0.9, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.9, y: 20 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                onClick={(e) => e.stopPropagation()}
+            >
+
               <div className="flex items-center justify-center mb-6">
                 <motion.div
                   className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center"
@@ -62,7 +65,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, onClose, onConfirm })
               </h2>
               
               <p className="text-gray-600 text-center mb-8">
-                Are you sure you want to delete this location? This action cannot be undone.
+                Are you sure you want to delete this {itemType}? This action cannot be undone.
               </p>
               
               <div className="flex items-center mb-8 p-4 bg-gray-50 rounded-lg">
@@ -105,3 +108,4 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, onClose, onConfirm })
 };
 
 export default DeleteModal;
+            

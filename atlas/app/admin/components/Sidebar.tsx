@@ -18,12 +18,12 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange }) => {
 
   return (
     <motion.aside 
-      className="w-64 bg-gradient-to-b from-purple-600 to-purple-800 text-white flex flex-col shadow-2xl"
+      className="w-64 bg-gradient-to-b from-blue-600 to-blue-800 text-white flex flex-col shadow-2xl"
       initial={{ x: -100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="p-6 border-b border-purple-700/30">
+      <div className="p-6 border-b border-blue-700/30">
         <motion.h1 
           className="text-3xl font-bold tracking-wider"
           initial={{ opacity: 0 }}
@@ -33,7 +33,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange }) => {
           UNIWAY
         </motion.h1>
         <motion.p 
-          className="text-sm text-purple-200 mt-1 tracking-wider"
+          className="text-sm text-blue-200 mt-1 tracking-wider"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -55,7 +55,7 @@ const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange }) => {
                 onClick={() => onViewChange(item.id)}
                 className={`w-full flex items-center justify-between p-4 rounded-xl transition-all duration-300 group ${
                   currentView === item.id
-                    ? 'bg-white text-purple-700 shadow-lg'
+                    ? 'bg-white text-blue-700 shadow-lg'
                     : 'text-white/90 hover:bg-white/10'
                 }`}
               >
