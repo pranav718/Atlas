@@ -1,4 +1,3 @@
-// app/register/page.tsx
 "use client";
 
 import React, { useState } from 'react';
@@ -6,16 +5,14 @@ import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import Link from 'next/link';
 import ReCAPTCHA from "react-google-recaptcha";
-import { motion } from 'framer-motion';
-import { Mail, Lock, User, UserPlus } from 'lucide-react';
 
 export default function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [captcha, setCaptcha] = useState<string | null>(null);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [captcha, setCaptcha] = useState<string | null>(null);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -43,11 +40,8 @@ export default function RegisterPage() {
       });
 
       if (res.ok) {
-        // Clear fields and go to login
-        setName('');
-        setEmail('');
-        setPassword('');
-        setCaptcha(null);
+        const form = e.target as HTMLFormElement;
+        form.reset();
         router.push('/login');
       } else {
         const data = await res.json();
@@ -73,134 +67,120 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center p-4">
-      <motion.div
-        className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="text-center mb-8">
-          <motion.img
-            src="/uniway.svg"
-            alt="Uniway"
-            className="h-16 mx-auto mb-4"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
-          />
-          <h1 className="text-3xl font-bold text-gray-800">Create your account</h1>
-          <p className="text-gray-600 mt-2">Join Uniway in seconds</p>
+    <div
+      className="relative min-h-screen overflow-hidden flex items-center"
+      style={{
+        // center “singularity” glow that blooms into blue
+        background:
+          'radial-gradient(circle at center, #ffffff 0%, rgba(96,165,250,0.25) 25%, rgba(59,130,246,0.45) 50%, rgba(37,99,235,0.75) 75%, #1e3a8a 100%)'
+      }}
+    >
+      {/* center divider (hidden on mobile) */}
+      <div className="pointer-events-none hidden md:block absolute left-1/2 top-[8%] bottom-[8%] w-[2px] bg-white/80 shadow-[0_0_20px_rgba(255,255,255,0.7)] rounded-full" />
+
+      <div className="relative z-10 container mx-auto px-4 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          {/* LEFT: your existing registration card — unchanged */}
+          <div className="flex md:justify-start justify-center">
+            <div className="shadow-2xl p-12 bg-white rounded-xl w-full max-w-md">
+              <h1 className="text-3xl font-bold mb-8 text-center text-gray-700">Register</h1>
+
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <input
+                  onChange={(e) => setName(e.target.value)}
+                  type="text"
+                  placeholder="Full Name"
+                  className="px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:border-black text-black placeholder:text-gray-400"
+                  disabled={isLoading}
+                />
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  type="email"
+                  placeholder="Email"
+                  className="px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:border-black text-black placeholder:text-gray-400"
+                  disabled={isLoading}
+                />
+                <input
+                  onChange={(e) => setPassword(e.target.value)}
+                  type="password"
+                  placeholder="Password"
+                  className="px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:border-black text-black placeholder:text-gray-400"
+                  disabled={isLoading}
+                />
+
+                <div className="flex justify-center">
+                  <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                    onChange={setCaptcha}
+                  />
+                </div>
+
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold cursor-pointer px-6 py-3 rounded-lg text-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isLoading || !captcha}
+                >
+                  {isLoading ? 'Registering...' : 'Register'}
+                </button>
+
+                {error && (
+                  <div className="bg-red-100 text-red-700 border border-red-400 w-full text-sm py-2 px-3 rounded-md mt-2 text-center">
+                    {error}
+                  </div>
+                )}
+
+                <div className="relative my-2">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-gray-300"></div>
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-2 bg-white text-gray-500">Or continue with</span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleGoogleSignUp}
+                  disabled={isLoading}
+                  className="flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 font-medium px-6 py-3 rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  </svg>
+                  {isLoading ? 'Signing up...' : 'Sign up with Google'}
+                </button>
+
+                <Link className="text-sm mt-3 text-center text-gray-500 hover:text-black transition-colors" href={'/login'}>
+                  Already have an account? <span className="underline font-semibold">Login</span>
+                </Link>
+              </form>
+            </div>
+          </div>
+
+          {/* RIGHT: brand + tagline + CTA card */}
+          <div className="hidden md:flex flex-col items-center md:items-start text-center md:text-left px-2">
+            <img src="/uniway.svg" alt="Uniway" className="h-24 md:h-28 lg:h-32 mb-6 drop-shadow-[0_6px_24px_rgba(255,255,255,0.35)]" />
+            <h2 className="text-3xl md:text-4xl font-black tracking-wide text-slate-900 drop-shadow-[0_2px_10px_rgba(255,255,255,0.35)]">
+              Your one-stop solution to finding every corner of the <span className="text-orange-500">campus</span>
+            </h2>
+
+            <div className="mt-10 w-full max-w-md bg-amber-100/90 border border-amber-200 rounded-2xl shadow-xl px-8 py-6">
+              <p className="text-slate-800 font-semibold tracking-wide">ALREADY A MEMBER?</p>
+              <Link
+                href="/login"
+                className="mt-3 inline-block font-bold text-blue-700 hover:text-blue-800 underline underline-offset-4"
+              >
+                LOGIN
+              </Link>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-            <input
-              type="text"
-              placeholder="Full name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              autoComplete="name"
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white transition-all"
-              disabled={isLoading}
-            />
-          </div>
-
-          <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-            <input
-              type="email"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoComplete="email"
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white transition-all"
-              disabled={isLoading}
-            />
-          </div>
-
-          <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="new-password"
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white transition-all"
-              disabled={isLoading}
-            />
-          </div>
-
-          <div className="flex justify-center pt-2">
-            <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-              onChange={setCaptcha}
-            />
-          </div>
-
-          <motion.button
-            type="submit"
-            disabled={isLoading || !captcha}
-            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            whileHover={{ scale: isLoading || !captcha ? 1 : 1.02 }}
-            whileTap={{ scale: isLoading || !captcha ? 1 : 0.98 }}
-          >
-            {isLoading ? (
-              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-            ) : (
-              <>
-                <UserPlus size={20} />
-                Create account
-              </>
-            )}
-          </motion.button>
-
-          {error && (
-            <motion.div
-              className="bg-red-50 text-red-600 p-3 rounded-lg text-sm text-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-            >
-              {error}
-            </motion.div>
-          )}
-
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
-            </div>
-          </div>
-
-          <motion.button
-            type="button"
-            onClick={handleGoogleSignUp}
-            disabled={isLoading}
-            className="w-full bg-white border border-gray-200 text-gray-700 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3"
-            whileHover={{ scale: isLoading ? 1 : 1.02 }}
-            whileTap={{ scale: isLoading ? 1 : 0.98 }}
-          >
-            <svg className="w-5 h-5" viewBox="0 0 24 24">
-              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-            </svg>
-            {isLoading ? 'Signing up...' : 'Sign up with Google'}
-          </motion.button>
-        </form>
-
-        <p className="text-center mt-6 text-gray-600">
-          Already have an account?{' '}
-          <Link href="/login" className="text-blue-600 hover:text-blue-700 font-medium">
-            Log in
-          </Link>
-        </p>
-      </motion.div>
+      {/* subtle vignette edges */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/10" />
     </div>
   );
 }
