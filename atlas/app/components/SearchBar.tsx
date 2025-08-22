@@ -15,6 +15,7 @@ interface SearchResult {
   name: string;
   type: string;
   category?: string;
+  coordinates?: [number, number]; 
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
@@ -26,27 +27,25 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
   const searchRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // Mock data - replace with actual data from your API
   const allLocations: SearchResult[] = [
-    { id: 1, name: 'Academic Block 1 (AB1)', type: 'Building', category: 'Academic' },
-    { id: 2, name: 'Academic Block 2 (AB2)', type: 'Building', category: 'Academic' },
-    { id: 3, name: 'Academic Block 3 (AB3)', type: 'Building', category: 'Academic' },
-    { id: 4, name: 'Lecture Hall Complex', type: 'Building', category: 'Academic' },
-    { id: 5, name: 'Central Library', type: 'Facility', category: 'Library' },
-    { id: 6, name: 'Sports Complex', type: 'Facility', category: 'Sports' },
-    { id: 7, name: 'Cafeteria', type: 'Facility', category: 'Food' },
-    { id: 8, name: 'Hostel Block A', type: 'Accommodation', category: 'Hostel' },
-    { id: 9, name: 'Hostel Block B', type: 'Accommodation', category: 'Hostel' },
-    { id: 10, name: 'Medical Center', type: 'Facility', category: 'Health' },
-    { id: 11, name: 'Auditorium', type: 'Facility', category: 'Events' },
-    { id: 12, name: 'Computer Lab', type: 'Facility', category: 'Academic' },
+    { id: 1, name: 'Academic Block 1 (AB1)', type: 'Building', category: 'Academic', coordinates: [26.84252267769878, 75.56475881089028] },
+    { id: 2, name: 'Academic Block 2 (AB2)', type: 'Building', category: 'Academic', coordinates: [26.843009041165054, 75.56583836911558] },
+    { id: 3, name: 'Academic Block 3 (AB3)', type: 'Building', category: 'Academic', coordinates: [26.844502393826332, 75.56476082808086] },
+    { id: 4, name: 'Lecture Hall Complex', type: 'Building', category: 'Academic', coordinates: [26.84432342141948, 75.56480585671513] },
+    { id: 5, name: 'Central Library', type: 'Facility', category: 'Library', coordinates: [26.84170260561239, 75.56624963390331] }, // Using Dome Building coordinates
+    { id: 6, name: 'Sports Complex', type: 'Facility', category: 'Sports', coordinates: [26.84555260680592, 75.56437977970938] }, // Using Cricket Ground coordinates
+    { id: 7, name: 'Cafeteria', type: 'Facility', category: 'Food', coordinates: [26.842958110025513, 75.56529740577874] }, // Using Old Mess coordinates
+    { id: 8, name: 'Hostel Block A', type: 'Accommodation', category: 'Hostel', coordinates: [26.842587713834796, 75.56163910374428] }, // Using B10 coordinates
+    { id: 9, name: 'Hostel Block B', type: 'Accommodation', category: 'Hostel', coordinates: [26.84159345497758, 75.56224247315566] }, // Using B3 coordinates
+    { id: 10, name: 'Medical Center', type: 'Facility', category: 'Health', coordinates: [26.841242818416347, 75.56248092837704] },
+    { id: 11, name: 'Auditorium', type: 'Facility', category: 'Events', coordinates: [26.843248340055393, 75.56626501290748] }, // Using Amphitheatre coordinates
+    { id: 12, name: 'Computer Lab', type: 'Facility', category: 'Academic', coordinates: [26.84366810077311, 75.56690807407736] }, // Using AWS Building coordinates
   ];
 
   useEffect(() => {
-    // Set popular locations on mount
+
     setPopularLocations(allLocations.slice(0, 5));
     
-    // Get recent searches from localStorage
     const recent = localStorage.getItem('recentSearches');
     if (recent) {
       setRecentSearches(JSON.parse(recent).slice(0, 3));
@@ -59,7 +58,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
         setIsOpen(false);
       }
     };
-
+    
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
@@ -68,10 +67,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
     setQuery(value);
     
     if (value.trim() === '') {
-      // Show popular/recent when query is empty
+
       setResults([]);
     } else {
-      // Filter locations based on query
+
       const filtered = allLocations.filter(location =>
         location.name.toLowerCase().includes(value.toLowerCase()) ||
         location.type.toLowerCase().includes(value.toLowerCase()) ||
@@ -82,14 +81,26 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
   };
 
   const handleLocationClick = (location: SearchResult) => {
-  // Save to recent searches
+
   const recent = localStorage.getItem('recentSearches');
   const recentArray = recent ? JSON.parse(recent) : [];
   const updated = [location, ...recentArray.filter((item: SearchResult) => item.id !== location.id)].slice(0, 5);
   localStorage.setItem('recentSearches', JSON.stringify(updated));
   
-  // Navigate to location
-  router.push(`/location/${location.id}`);
+  if (location.coordinates) {
+    const locationData = {
+      name: location.name,
+      coordinates: location.coordinates,
+      id: location.id
+    };
+
+    const encodedData = encodeURIComponent(JSON.stringify(locationData));
+    router.push(`/directions/${encodedData}`);
+  } else {
+
+    alert('Location coordinates not available');
+  }
+  
   setIsOpen(false);
   setQuery('');
 };
@@ -115,7 +126,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
           className={inputClasses}
         />
       </div>
-
+      
       <AnimatePresence>
         {isOpen && (showSuggestions || showResults) && (
           <motion.div
@@ -134,7 +145,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
               })
             }}
           >
-            {/* Show search results when query exists */}
+
             {showResults && (
               <div>
                 <div className="px-4 py-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
@@ -155,8 +166,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
                 ))}
               </div>
             )}
-
-            {/* Show suggestions when query is empty */}
+            
             {showSuggestions && (
               <>
                 {/* Recent Searches */}
