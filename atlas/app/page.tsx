@@ -179,6 +179,18 @@ const BuildingsSection: React.FC = () => {
       imageUrl: "/LHC.jpeg",
       coordinates: [26.84432342141948, 75.56480585671513] as [number, number],
       mostVisited: ["Auditoriums", "Conference Rooms", "Foyer"]
+    },
+    {
+      title: "Dome Building",
+      imageUrl: "/dome-building.jpeg",
+      coordinates: [26.841750470013448, 75.56588485351799] as [number, number],
+      mostVisited: ["Dome Hall", "Library", "Administration Offices"]
+    },
+    {
+      title: "Workshop Building",
+      imageUrl: "/workshop.jpg",
+      coordinates: [26.84371248033969, 75.56687143248219] as [number, number],
+      mostVisited: ["Workshop Rooms", "Labs", "Cafeteria"]
     }
   ];
 

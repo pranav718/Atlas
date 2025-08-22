@@ -23,8 +23,8 @@ const InteractiveButton: React.FC<InteractiveButtonProps> = ({
     <motion.button
       className={`px-6 py-2 rounded-full font-medium transition-all ${
         isPrimary
-          ? 'bg-purple-600 text-white hover:bg-purple-700'
-          : 'bg-transparent text-purple-600 border border-purple-600 hover:bg-purple-600 hover:text-white'
+          ? 'bg-blue-600 text-white hover:bg-blue-700'
+          : 'bg-transparent text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white'
       }`}
       onClick={() => router.push(route)}
       whileHover={{ scale: 1.05 }}

@@ -65,7 +65,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center p-4">
       <motion.div
         className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md"
         initial={{ opacity: 0, y: 20 }}
@@ -92,7 +92,7 @@ export default function LoginPage() {
             onClick={() => setLoginType('user')}
             className={`flex-1 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
               loginType === 'user'
-                ? 'bg-purple-600 text-white'
+                ? 'bg-blue-600 text-white'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
             whileHover={{ scale: 1.02 }}
@@ -106,7 +106,7 @@ export default function LoginPage() {
             onClick={() => setLoginType('admin')}
             className={`flex-1 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
               loginType === 'admin'
-                ? 'bg-purple-600 text-white'
+                ? 'bg-blue-600 text-white'
                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
             }`}
             whileHover={{ scale: 1.02 }}
@@ -125,7 +125,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email address"
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 focus:bg-white transition-all"
+              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white transition-all"
               disabled={isLoading}
             />
           </div>
@@ -137,14 +137,14 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
-              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 focus:bg-white transition-all"
+              className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 focus:bg-white transition-all"
               disabled={isLoading}
             />
           </div>
 
           <motion.button
             type="submit"
-            className="w-full bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             disabled={isLoading}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -202,7 +202,7 @@ export default function LoginPage() {
 
         <p className="text-center mt-6 text-gray-600">
           Don't have an account?{' '}
-          <Link href="/register" className="text-purple-600 hover:text-purple-700 font-medium">
+          <Link href="/register" className="text-blue-600 hover:text-blue-700 font-medium">
             Sign up
           </Link>
         </p>

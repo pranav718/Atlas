@@ -78,12 +78,12 @@ const Card: React.FC<CardProps> = ({ title, imageUrl, coordinates, mostVisited }
 
       {/* Content section */}
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-purple-600 transition-colors">
+        <h3 className="text-xl font-bold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors">
           {title}
         </h3>
 
         <div className="flex items-center gap-2 text-gray-600 mb-4">
-          <MapPin size={16} className="text-purple-500" />
+          <MapPin size={16} className="text-blue-500" />
           <span className="text-sm">View on map</span>
           <ArrowRight size={14} className="ml-auto opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-1 transition-all" />
         </div>
@@ -94,11 +94,11 @@ const Card: React.FC<CardProps> = ({ title, imageUrl, coordinates, mostVisited }
             {mostVisited.map((place, index) => (
               <motion.span
                 key={index}
-                className="px-3 py-1 bg-purple-50 text-purple-700 rounded-full text-xs font-medium cursor-pointer"
+                className="px-3 py-1 bg-gray-100 text-blue-700 rounded-full text-xs font-medium cursor-pointer"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, backgroundColor: '#9333ea', color: '#ffffff' }}
+                whileHover={{ scale: 1.05, backgroundColor: '#0044f0', color: '#ffffff' }}
                 onClick={(e) => handlePlaceClick(e, place)}
               >
                 {place}

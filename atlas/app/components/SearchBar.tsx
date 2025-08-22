@@ -96,7 +96,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ variant = 'default' }) => {
 
   const baseClasses = "relative w-full";
   const inputClasses = variant === 'hero' 
-    ? "w-full px-6 py-4 pl-14 rounded-full bg-white/90 backdrop-blur-sm text-gray-800 placeholder-gray-500 shadow-lg focus:outline-none focus:ring-4 focus:ring-purple-300"
+    ? "w-full px-6 py-4 pl-14 rounded-full bg-white/90 backdrop-blur-sm text-gray-800 placeholder-gray-500 shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300"
     : "w-full px-4 py-3 pl-12 rounded-lg bg-gray-100 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500";
 
   const showSuggestions = query.trim() === '' && (recentSearches.length > 0 || popularLocations.length > 0);
