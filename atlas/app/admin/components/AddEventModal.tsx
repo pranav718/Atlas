@@ -80,7 +80,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
                     placeholder="Enter event name"
                     required
                   />
@@ -89,7 +89,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      <Calendar className="w-4 h-4 inline mr-2 text-purple-500" />
+                      <Calendar className="w-4 h-4 inline mr-2 text-blue-500" />
                                             Date & Time
                     </label>
                     <input
@@ -97,14 +97,14 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                       name="time"
                       value={formData.time}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
                       required
                     />
                   </div>
                   
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      <MapPin className="w-4 h-4 inline mr-2 text-purple-500" />
+                      <MapPin className="w-4 h-4 inline mr-2 text-blue-500" />
                       Location
                     </label>
                     <input
@@ -112,7 +112,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                       name="location"
                       value={formData.location}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
                       placeholder="Event location"
                       required
                     />
@@ -121,7 +121,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <User className="w-4 h-4 inline mr-2 text-purple-500" />
+                    <User className="w-4 h-4 inline mr-2 text-blue-500" />
                     Host
                   </label>
                   <input
@@ -129,7 +129,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                     name="host"
                     value={formData.host}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
                     placeholder="Event host"
                     required
                   />
@@ -137,7 +137,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <FileText className="w-4 h-4 inline mr-2 text-purple-500" />
+                    <FileText className="w-4 h-4 inline mr-2 text-blue-500" />
                     Description
                   </label>
                   <textarea
@@ -145,7 +145,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                     value={formData.desc}
                     onChange={handleChange}
                     rows={3}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors resize-none"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors resize-none"
                     placeholder="Event description"
                     required
                   />
@@ -155,7 +155,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                   <motion.button
                     type="button"
                     onClick={onClose}
-                    className="px-6 py-3 border-2 border-purple-200 text-purple-600 font-semibold rounded-xl hover:bg-purple-50 transition-colors"
+                    className="px-6 py-3 border-2 border-blue-200 text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -163,7 +163,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose, onAdd })
                   </motion.button>
                   <motion.button
                     type="submit"
-                    className="px-6 py-3 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-colors shadow-lg"
+                    className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-lg"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >

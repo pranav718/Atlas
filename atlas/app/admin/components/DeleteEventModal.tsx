@@ -74,7 +74,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ isOpen, onClose, onConfirm, i
                   type="checkbox"
                   checked={dontWarnAgain}
                   onChange={(e) => setDontWarnAgain(e.target.checked)}
-                  className="h-4 w-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+                  className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                 />
                 <label htmlFor="dont-warn-checkbox" className="ml-3 text-sm text-gray-700">
                   Don't warn me again

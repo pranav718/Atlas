@@ -65,14 +65,14 @@ const AddLocationModal: React.FC<AddLocationModalProps> = ({ isOpen, onClose, on
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <MapPin className="w-4 h-4 inline mr-2 text-purple-500" />
+                    <MapPin className="w-4 h-4 inline mr-2 text-blue-500" />
                     Location Name
                   </label>
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
                     placeholder="Enter location name"
                     required
                   />
@@ -80,13 +80,13 @@ const AddLocationModal: React.FC<AddLocationModalProps> = ({ isOpen, onClose, on
                 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    <Tag className="w-4 h-4 inline mr-2 text-purple-500" />
+                    <Tag className="w-4 h-4 inline mr-2 text-blue-500" />
                     Category
                   </label>
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-200 bg-white rounded-xl focus:border-purple-500 focus:outline-none transition-colors"
+                    className="w-full px-4 py-3 border-2 border-gray-200 bg-white rounded-xl focus:border-blue-500 focus:outline-none transition-colors"
                     required
                   >
                     <option value="" disabled>Select a category</option>
@@ -102,7 +102,7 @@ const AddLocationModal: React.FC<AddLocationModalProps> = ({ isOpen, onClose, on
                   <motion.button
                     type="button"
                     onClick={onClose}
-                    className="px-6 py-3 border-2 border-purple-200 text-purple-600 font-semibold rounded-xl hover:bg-purple-50 transition-colors"
+                    className="px-6 py-3 border-2 border-blue-200 text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-colors"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -110,7 +110,7 @@ const AddLocationModal: React.FC<AddLocationModalProps> = ({ isOpen, onClose, on
                   </motion.button>
                   <motion.button
                     type="submit"
-                    className="px-6 py-3 bg-purple-600 text-white font-semibold rounded-xl hover:bg-purple-700 transition-colors shadow-lg"
+                    className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-lg"
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                   >

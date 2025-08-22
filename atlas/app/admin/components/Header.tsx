@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ currentView }) => {
       <div className="flex items-center gap-3">
         <motion.button 
           onClick={() => router.push('/')}
-          className="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-200 flex items-center gap-2 text-purple-600 font-medium transition-all duration-300"
+          className="px-4 py-2 rounded-lg bg-blue-100 hover:bg-blue-200 flex items-center gap-2 text-blue-600 font-medium transition-all duration-300"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
@@ -60,11 +60,11 @@ const Header: React.FC<HeaderProps> = ({ currentView }) => {
         </motion.button>
         
         <motion.button 
-          className="w-12 h-12 rounded-full bg-purple-100 hover:bg-purple-200 flex items-center justify-center shadow-sm transition-all duration-300"
+          className="w-12 h-12 rounded-full bg-blue-100 hover:bg-blue-200 flex items-center justify-center shadow-sm transition-all duration-300"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <User className="w-6 h-6 text-purple-600" />
+          <User className="w-6 h-6 text-blue-600" />
         </motion.button>
       </div>
     </motion.header>

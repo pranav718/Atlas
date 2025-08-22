@@ -57,7 +57,7 @@ const EventsView: React.FC<EventsViewProps> = ({ events, onDelete }) => {
           events.map((event, index) => (
             <motion.div
               key={event.id}
-              className="grid grid-cols-6 gap-6 px-6 py-5 items-center hover:bg-purple-50/50 transition-colors duration-200"
+              className="grid grid-cols-6 gap-6 px-6 py-5 items-center hover:bg-blue-50/50 transition-colors duration-200"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
@@ -66,19 +66,19 @@ const EventsView: React.FC<EventsViewProps> = ({ events, onDelete }) => {
                 <p className="font-medium text-gray-800">{event.name}</p>
               </div>
               <div className="flex items-center gap-2 text-gray-600">
-                <Calendar className="w-4 h-4 text-purple-500" />
+                <Calendar className="w-4 h-4 text-blue-500" />
                 <p className="text-sm">{formatDateTime(event.time)}</p>
               </div>
               <div className="flex items-center gap-2 text-gray-600">
-                <MapPin className="w-4 h-4 text-purple-500" />
+                <MapPin className="w-4 h-4 text-blue-500" />
                 <p className="text-sm">{event.location}</p>
               </div>
               <div className="flex items-center gap-2 text-gray-600">
-                <User className="w-4 h-4 text-purple-500" />
+                <User className="w-4 h-4 text-blue-500" />
                 <p className="text-sm">{event.host}</p>
               </div>
               <div className="flex items-center gap-2 text-gray-600">
-                <FileText className="w-4 h-4 text-purple-500" />
+                <FileText className="w-4 h-4 text-blue-500" />
                 <p className="text-sm truncate">{event.desc}</p>
               </div>
               <div>
