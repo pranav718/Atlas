@@ -154,7 +154,7 @@ export default function AdminDashboard() {
   if (isLoading) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <div className="text-purple-600 text-xl">Loading...</div>
+        <div className="text-blue-600 text-xl">Loading...</div>
       </div>
     );
   }
@@ -180,7 +180,7 @@ export default function AdminDashboard() {
           {/* Floating Add Button */}
           <motion.button
             onClick={() => currentView === 'locations' ? setShowLocationModal(true) : setShowEventModal(true)}
-            className="absolute bottom-12 right-12 bg-purple-600 hover:bg-purple-700 text-white font-semibold py-4 px-6 rounded-full shadow-lg flex items-center group"
+            className="absolute bottom-12 right-12 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-full shadow-lg flex items-center group"
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
             initial={{ opacity: 0, scale: 0.8 }}

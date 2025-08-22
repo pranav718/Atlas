@@ -161,7 +161,7 @@ export default function RegisterPage() {
 
           {/* RIGHT: brand + tagline + CTA card */}
           <div className="hidden md:flex flex-col items-center md:items-start text-center md:text-left px-2">
-            <img src="/uniway.svg" alt="Uniway" className="h-24 md:h-28 lg:h-32 mb-6 drop-shadow-[0_6px_24px_rgba(255,255,255,0.35)]" />
+            <img src="/uniway_new.svg" alt="Uniway" className="h-24 md:h-28 lg:h-32 mb-6 drop-shadow-[0_6px_24px_rgba(255,255,255,0.35)]" />
             <h2 className="text-3xl md:text-4xl font-black tracking-wide text-slate-900 drop-shadow-[0_2px_10px_rgba(255,255,255,0.35)]">
               Your one-stop solution to finding every corner of the <span className="text-orange-500">campus</span>
             </h2>

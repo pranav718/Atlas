@@ -223,7 +223,7 @@ export default function LoginPage() {
               alt="Uniway"
               className="h-24 md:h-28 lg:h-32 mb-6 drop-shadow-[0_6px_24px_rgba(255,255,255,0.35)]"
             />
-            <h2 className="text-3xl md:text-4xl font-black tracking-wide text-slate-900 drop-shadow-[0_2px_10px_rgba(255,255,255,0.35)]">
+            <h2 className="text-3xl md:text-4xl font-black tracking-wide text-slate-900 drop-shadow-[0_2px_10px_rgba(255,255,255,0.35)]"> 
               Your One Stop Solution to Every Corner of the <span className="text-orange-500">Campus</span>
             </h2>
 

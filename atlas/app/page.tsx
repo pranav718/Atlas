@@ -25,7 +25,7 @@ const Header: React.FC = () => {
       <div className="h-[50px] bg-white/90 backdrop-blur-sm flex items-center justify-between px-8 shadow-sm relative"> {/* Add relative positioning */}
         <div className="flex items-center gap-2">
           <motion.img 
-            src="/uniway_new.svg" 
+            src="/uniwaynew.svg" 
             alt="Uniway" 
 
             className="h-8"
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
         </div>
         <div className="flex gap-3 items-center relative z-50"> {/* Add relative z-50 */}
           {status === 'loading' ? (
-            <div className="text-purple-600 text-sm">Loading...</div>
+            <div className="text-blue-600 text-sm">Loading...</div>
           ) : session ? (
             <UserMenu />
           ) : (
