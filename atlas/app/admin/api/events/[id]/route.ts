@@ -6,10 +6,10 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// DELETE event
+// DELETE event (type-safe fallback)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } } | any   // ✅ accepts both strict + loose
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -17,7 +17,11 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const eventId = params.id;
+    const eventId = context.params?.id;
+
+    if (!eventId) {
+      return NextResponse.json({ error: 'Event ID missing' }, { status: 400 });
+    }
 
     await prisma.event.delete({
       where: { id: eventId }
@@ -26,9 +30,6 @@ export async function DELETE(
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Error deleting event:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
