@@ -1,10 +1,12 @@
-// app/admin/api/events/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/authOptions';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
+
+// Add this to prevent static generation
+export const dynamic = 'force-dynamic';
 
 // GET all events
 export async function GET() {

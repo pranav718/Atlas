@@ -1,15 +1,17 @@
-// app/admin/api/events/[id]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/authOptions'
+import { authOptions } from '@/lib/authOptions';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// DELETE event (type-safe fallback)
+// Add this to prevent static generation
+export const dynamic = 'force-dynamic';
+
+// DELETE event
 export async function DELETE(
   request: NextRequest,
-  context: { params: { id: string } } | any   // ✅ accepts both strict + loose
+  { params }: { params: { id: string } }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -17,7 +19,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const eventId = context.params?.id;
+    const eventId = params.id;
 
     if (!eventId) {
       return NextResponse.json({ error: 'Event ID missing' }, { status: 400 });
