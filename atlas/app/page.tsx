@@ -242,10 +242,10 @@ const Footer: React.FC = () => (
       <div className="flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center gap-3 mb-4 md:mb-0">
           <img src="/uniway.svg" alt="Uniway" className="h-10" />
-          <span className="text-lg font-semibold text-white">Uniway</span>
+          
         </div>
         <p className="text-white text-sm">
-          Made with love by team Atlas
+          Made with love by team atlas
         </p>
       </div>
     </div>
