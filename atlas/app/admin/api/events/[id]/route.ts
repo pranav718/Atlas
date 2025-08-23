@@ -8,10 +8,10 @@ const prisma = new PrismaClient();
 // Add this to prevent static generation
 export const dynamic = 'force-dynamic';
 
-// DELETE event
+// DELETE event - Updated parameter structure
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -19,7 +19,8 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const eventId = params.id;
+    // Await the params since it's now a Promise
+    const { id: eventId } = await params;
 
     if (!eventId) {
       return NextResponse.json({ error: 'Event ID missing' }, { status: 400 });
