@@ -241,7 +241,7 @@ const Footer: React.FC = () => (
     <div className="max-w-7xl mx-auto px-8">
       <div className="flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center gap-3 mb-4 md:mb-0">
-          <img src="/uniway.svg" alt="Uniway" className="h-10" />
+          <img src="/uniwaynew.svg" alt="Uniway" className="h-10" />
           
         </div>
         <p className="text-white text-sm">
