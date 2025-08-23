@@ -7,22 +7,23 @@
   "private": true,
   
   "scripts": {
+
   
+    "dev": "next dev",
+
+  
+    "build": "next build",
     
-  "dev": "next dev",
-  
+    "vercel-build": "prisma generate && next build",
+
+    "start": "next start",
+
+    "lint": "next lint",
+
+    "postinstall": "prisma generate",
     
-  "build": "next build",
-  
+    "seed": "tsx prisma/seed.ts"
     
-  "start": "next start",
-  
-    
-  "lint": "next lint",
-  
-    
-  "seed": "tsx prisma/seed.ts"
-  
   },
   
   "dependencies": {
