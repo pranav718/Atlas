@@ -1,24 +1,27 @@
+// app/directions/[locationName]/page.tsx
 "use client";
 
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { use } from 'react';
 
 interface LocationData {
   name: string;
   coordinates: [number, number];
-  id?: number; // Add id field
+  id?: number;
 }
 
 interface DirectionsPageProps {
-  params: {
+  params: Promise<{
     locationName: string;
-  };
+  }>;
 }
 
 const MapWithRouting = dynamic(() => import('./MapWithRouting'), { ssr: false });
 
 const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
+  const resolvedParams = use(params);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locationError, setLocationError] = useState<string>('');
   const [locationData, setLocationData] = useState<LocationData | null>(null);
@@ -28,7 +31,7 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
   useEffect(() => {
     const processLocationData = async () => {
       try {
-        const decodedData = decodeURIComponent(params.locationName);
+        const decodedData = decodeURIComponent(resolvedParams.locationName);
         const parsedData = JSON.parse(decodedData);
         
         if (!parsedData.name || !Array.isArray(parsedData.coordinates) || parsedData.coordinates.length !== 2) {
@@ -64,10 +67,10 @@ const DirectionsPage: React.FC<DirectionsPageProps> = ({ params }) => {
       }
     };
 
-    if (params.locationName) {
+    if (resolvedParams.locationName) {
       processLocationData();
     }
-  }, [params]);
+  }, [resolvedParams]);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && 'geolocation' in navigator) {
