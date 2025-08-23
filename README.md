@@ -14,7 +14,7 @@
 
 ---
 
-[**Live Demo 🚀**]((https://atlas-9m7h.vercel.app))
+[**Live Demo 🚀**](https://atlas-9m7h.vercel.app/)
 <br>
 ⚠ **Disclaimer:** Optimized for **PC/Desktop displays** only — mobile and tablet layouts may not display correctly.
 
